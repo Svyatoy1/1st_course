@@ -22,10 +22,10 @@ void addNode (int value, nodeStack** head, nodeStack** tail){
 
 void colaps (nodeStack* head, nodeStack* tail, nodeStack** head1, nodeStack** tail1, nodeStack** head2, nodeStack** tail2){
 	if (!head)
-    return;
-  colaps (head->next, tail, head1, tail1, head2, tail2);
-  if (head->num % 2 == 0)
-    addNode (head->num, head1, tail1);
-  else
-    addNode (head->num, head2, tail2);
+		return;
+  	colaps (head->next, tail, head1, tail1, head2, tail2);
+  	if (head->num % 2 == 0)
+  		addNode (head->num, head1, tail1);
+  	else
+   		addNode (head->num, head2, tail2);
 }
