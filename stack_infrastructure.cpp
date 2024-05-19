@@ -1,8 +1,6 @@
 #include <iostream>
 using namespace std;
 
-// functions for infrastructure
-
 struct nodeStack{
 	int num; 
 	nodeStack* next;
