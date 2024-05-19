@@ -1,16 +1,25 @@
 #include <iostream>
 using namespace std;
 
+// functions for infrastructure
+
 struct nodeStack{
 	int num; 
 	nodeStack* next;
 };
 
-void addNode (int value, nodeStack** head){
+void addNode (int value, nodeStack** head, nodeStack** tail){
 	nodeStack* temp = new nodeStack;
 	temp->num = value;
-	temp->next = *head;	
-	*head = temp;
+	if ((*head)==NULL){
+		(*head) = temp;
+		(*tail) = (*head);
+		(*tail)->next = NULL;
+	}
+	else {
+		temp->next = *head;	
+		*head = temp;
+	}
 }
 
 void showStack (nodeStack* head){
@@ -31,7 +40,6 @@ void delStack (nodeStack** head){
 
 int main () {
 	nodeStack* head = NULL;
-	
 	for (int i = 0; i<10; i++){
 		addNode (i, &head);
 	}
