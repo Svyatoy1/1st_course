@@ -43,7 +43,6 @@ int main () {
 	for (int i = 0; i<10; i++){
 		addNode (i, &head);
 	}
-	
 	showStack (head);
 	delStack (&head);	
 	return 0;
