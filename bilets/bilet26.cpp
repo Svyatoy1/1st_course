@@ -11,13 +11,12 @@ struct nodeStack{
 	nodeStack* next;
 };
 
-void addNode (int value, nodeStack** head, nodeStack** tail){
+void addNode (int value, nodeStack** head){
 	nodeStack* temp = new nodeStack;
 	temp->num = value;
 	if ((*head)==NULL){
 		(*head) = temp;
-		(*tail) = (*head);
-		(*tail)->next = NULL;
+		(*head)->next = NULL;
 	}
 	else {
 		temp->next = *head;	
@@ -25,14 +24,14 @@ void addNode (int value, nodeStack** head, nodeStack** tail){
 	}
 }
 
-void colaps (nodeStack* head, nodeStack* tail, nodeStack** head1, nodeStack** tail1, nodeStack** head2, nodeStack** tail2){
+void colaps (nodeStack* head, nodeStack** head1, nodeStack** head2){
 	if (!head)
 		return;
-  	colaps (head->next, tail, head1, tail1, head2, tail2);
+  	colaps (head->next, head1, head2);
   	if (head->num % 2 == 0)
-  		addNode (head->num, head1, tail1);
+  		addNode (head->num, head1);
   	else
-   		addNode (head->num, head2, tail2);
+   		addNode (head->num, head2);
 }
 
 //task2 
