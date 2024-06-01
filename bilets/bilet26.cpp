@@ -45,12 +45,12 @@ struct listI {
 };
 
 // Структура для представлення рядка в матриці
-struct matrix {
+struct row {
     listI* list;
-    matrix* next;
+    row* next;
 };
 
-int searchMinElement (matrix* headM){
+int searchMinElement (row* headM){
 	int min = headM->list->num;
 	while (headM){
 		listI* temp = headM->list;
