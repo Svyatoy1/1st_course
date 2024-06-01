@@ -34,3 +34,36 @@ void colaps (nodeStack* head, nodeStack* tail, nodeStack** head1, nodeStack** ta
   	else
    		addNode (head->num, head2, tail2);
 }
+
+//task2 
+/* Написати функцію для знаходження значення мінімального елемента розрідженої матриці
+   В[20,50] при послідовно-зв'язному індексному зберіганні*/
+
+// Структура для представлення елемента в рядку
+struct listI {
+    int num;
+    listI* next;
+};
+
+// Структура для представлення рядка в матриці
+struct matrix {
+    listI* list;
+    matrix* next;
+};
+
+int searchMinElement (matrix* headM){
+	int min = headM->list->num;
+	while (headM){
+		listI* temp = headM->list;
+		while (temp){
+			if (temp->num < min)
+				min = temp->num;
+			temp = temp->next;
+		}
+		headM = headM->next;
+	}
+	if (min>0)
+		return min;
+	else
+		return 0;
+}
