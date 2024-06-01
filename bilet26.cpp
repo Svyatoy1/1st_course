@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+//task1 
+
 struct nodeStack{
 	int num; 
 	nodeStack* next;
