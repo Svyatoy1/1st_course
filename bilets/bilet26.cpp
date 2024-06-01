@@ -61,10 +61,7 @@ int searchMinElement (row* headM){
 		}
 		headM = headM->next;
 	}
-	if (min>0)
-		return min;
-	else
-		return 0;
+	return min;
 }
 
 //task3 
