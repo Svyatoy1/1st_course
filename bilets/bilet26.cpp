@@ -46,14 +46,14 @@ struct listI {
 
 // Структура для представлення рядка в матриці
 struct row {
-    listI* list;
+    listI* node;
     row* next;
 };
 
 int searchMinElement (row* headM){
-	int min = headM->list->num;
+	int min = headM->node->num;
 	while (headM){
-		listI* temp = headM->list;
+		listI* temp = headM->node;
 		while (temp){
 			if (temp->num < min)
 				min = temp->num;
