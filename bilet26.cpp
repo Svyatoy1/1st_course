@@ -67,3 +67,37 @@ int searchMinElement (matrix* headM){
 	else
 		return 0;
 }
+
+//task3 
+/* Написати функцію, яка перевіряє, чи є заданий граф транзитивним (для довільних вершин
+   u, v, w якщо u, v, а також v, w - суміжні, суміжними є u та w */
+
+bool isEdge(node* head, int v) {
+    node* current = head;
+    while (current) {
+        if (current->num == v) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
+bool isTransitive(grph& graph) {
+    for (int u = 0; u < 8; u++) {
+        node* vNode = graph.arr[u];
+        while (vNode) {
+            int v = vNode->num;
+            node* wNode = graph.arr[v];
+            while (wNode) {
+                int w = wNode->num;
+                if (!isEdge(graph.arr[u], w)) {
+                    return false;
+                }
+                wNode = wNode->next;
+            }
+            vNode = vNode->next;
+        }
+    }
+    return true;
+}
