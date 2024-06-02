@@ -8,8 +8,8 @@ using namespace std;
 
 struct list{
    int num;
-   list* head;
-   list* tail;
+   list* left;
+   list* right;
 };
 
 void toCompactList(list** head, list** tail) {
