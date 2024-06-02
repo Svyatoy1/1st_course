@@ -135,34 +135,80 @@ struct grph {
     node* arr[8];
 };
 
-grph arcReverseOrientation (grph graph){
-	grph* reverse = new grph;
-	for (int i=0; i<10; i++)
-		reverse->arr[i] = NULL;
-
-	for (int i=0; i<10; i++) {
-		node* temp = graph.arr[i];
-		while (temp){
-			node* number = new node;
-			number->num = i+1;
-			number->next = NULL;
-
-			node** added = &(reverse->arr[temp->num - 1];
-
-			if (*added == NULL)
-				*added = number;
-			else {
-				node* start = (*added);
-            			while ((*added)->next)
-                    			(*added) = (*added)->next;
-               			(*added)->next = number;
-               			(*added) = start;
-			}
-			temp = temp->next;
-		}
-	}
-	return reverse;
+void showMatrix (int mtr[8][8]){
+    for (int i=0; i<8; i++){
+        for (int j=0; j<8; j++)
+            cout << mtr[i][j];
+        cout << endl;
+    }
 }
+
+grph matrixToStruct(int mtr[8][8]){
+    grph graph;
+    for (int i=0; i<8; i++)
+        graph.arr[i] = NULL;
+
+    for (int i=0; i<8; i++){
+        node* tempLast = NULL;
+        for (int j=0; j<8; j++){
+            if (mtr[i][j] != 0){
+                node* tempNew = new node;
+                tempNew->num = j;
+                tempNew->next = NULL;
+
+                if(!graph.arr[i])
+                    graph.arr[i] = tempNew;
+                else
+                    tempLast->next = tempNew;
+                tempLast = tempNew;
+            }
+        }
+    }
+    return graph;
+}
+
+void showStruct (grph Graph){
+    for (int i=0; i<8; i++){
+        cout << "point: " << i+1 << " -> ";
+        node* temp = Graph.arr[i];
+        while (temp){
+            cout << temp->num+1 << "; ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+}
+
+// MAIN FUNCTION
+grph arcReverseOrientation(grph graph) {
+    grph reverse;
+    for (int i = 0; i < 8; i++)
+        reverse.arr[i] = NULL;
+
+    for (int i = 0; i < 8; i++) {
+        node* temp = graph.arr[i];
+        while (temp) {
+            node* number = new node;
+            number->num = i;
+            number->next = NULL;
+
+            node** added = &(reverse.arr[temp->num]);
+
+            if (*added == NULL)
+                *added = number;
+            else {
+                node* start = *added;
+                while ((*added)->next)
+                    *added = (*added)->next;
+                (*added)->next = number;
+                *added = start;
+            }
+            temp = temp->next;
+        }
+    }
+    return reverse;
+}
+
 
 int main () {
 //task1
@@ -200,4 +246,23 @@ int main () {
 	cout << "output:  "<<out<<endl;
         cout << "count result: " << countPOLIZ(out);
 	return 0;
+	
+	// task3
+	int mtr[8][8] = {{0,1,0,1,0,0,1,0},
+                      {0,0,0,0,0,0,0,0},
+                      {0,0,0,0,0,0,0,0},
+                      {0,0,0,0,0,0,0,0},
+                      {0,0,0,0,0,0,0,0},
+                      {0,0,0,0,0,0,0,0},
+                      {0,0,0,0,0,0,0,0}, 
+                      {0,0,0,0,0,0,0,0}};
+
+    showMatrix(mtr);
+    grph Graphik = matrixToStruct(mtr);
+    showStruct(Graphik);
+    
+    grph reverse = arcReverseOrientation(Graphik);
+    showStruct(reverse);
+    
+    return 0;
 }
