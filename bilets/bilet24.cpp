@@ -46,3 +46,27 @@ void countLessThan(node* root, int number, int* count) {
 //task3 
 /* Написати функцію, яка перевіряє зв'язніть неорієнтованого графа, поданого структурою суміжності */
 
+void DFS(grph graph, int active, bool check[8]) {
+    check[active - 1] = true;
+
+    node* temp = graph.arr[active - 1];
+    while (temp) {
+        if (!check[temp->num - 1])
+            DFS(graph, temp->num, check);
+        temp = temp->next;
+    }
+}
+
+bool isGraphConnected(grph& graph) {
+    bool check[8] = {false};
+   
+    int startNode = 1;
+    DFS(graph, startNode, check);
+   
+    for (int i = 0; i < 8; i++) {
+        if (!check[i]) {
+            return false;
+        }
+    }
+    return true;
+}
