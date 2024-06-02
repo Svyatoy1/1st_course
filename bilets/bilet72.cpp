@@ -6,6 +6,45 @@ using namespace std;
    своїм зв'язним зберіганням. Написати функцію для представлення F 
    "стислим зв'язним зберіганням". */
 
+struct list{
+   int num;
+   list* head;
+   list* tail;
+};
+
+void toCompactList(list** head, list** tail)
+{
+	list* start = (*head);
+	while (*head) {
+		if ((*head)->num == 0) {
+			list* temp = (*head);
+			if ((*head)->right == NULL) {
+				start = (*head)->left;
+				(*head) = (*head)->left;
+				(*head)->right = NULL;
+				delete temp;
+				continue;
+			}
+			else if ((*head)->left == NULL) {
+				(*tail) = (*tail)->right;
+				(*tail)->left = NULL;
+				(*head) = (*tail);
+				delete temp;
+				continue;
+			} 
+         else {
+				(*head)->left->right = (*head)->right;
+				(*head)->right->left = (*head)->left;
+				(*head) = (*head)->left;
+				delete temp;
+				continue;
+			}
+		}
+		(*head) = (*head)->left;
+	}
+	(*head) = start;
+}
+
 //task2
 /* Написати функцію для знаходження у невпорядкованому бінарному дереві,
    що зберігається у "стандартній формі", вершини зі значенням v 
