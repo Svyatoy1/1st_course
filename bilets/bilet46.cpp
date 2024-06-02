@@ -72,7 +72,7 @@ int findZerosFromTo(int i, int j, cListNode* head) {
 }
 
 int main () {
-	listNode* head = NULL;
+    listNode* head = NULL;
     listNode* tail = NULL;
 
     head = new listNode{1, NULL, NULL};
