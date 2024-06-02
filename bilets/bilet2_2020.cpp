@@ -13,11 +13,11 @@ void printElementsBetweenMinAndMax(Node* head){
     Node *minNode = head;
     Node *maxNode = head;
 
-    while (current){
-        if(current->data < minNode->data){
+    while (current) {
+        if (current->data < minNode->data) {
             minNode = current;
             minIndex = currentIndex;
-        }else if(current->data > maxNode->data){
+        } else if (current->data > maxNode->data) {
             maxNode = current;
             maxIndex = currentIndex;
         }
@@ -27,17 +27,23 @@ void printElementsBetweenMinAndMax(Node* head){
 
     Node* startFrom;
     Node* endBy;
-    if(maxIndex > minIndex){
+    if (maxIndex > minIndex) {
         startFrom = minNode;
         endBy = maxNode;
-    }else{
+    } else {
         startFrom = maxNode;
         endBy = minNode;
     }
     Node* currentToPrint = startFrom;
 
-    while (currentToPrint!=endBy->next){
-        cout<< currentToPrint->data << "->";
+    while (currentToPrint != endBy->next){
+        cout << currentToPrint->data << "->";
         currentToPrint = currentToPrint->next;
     }
 }
+
+//task2 
+/* Використовуючи відповідний механізм черг або стеків, написати функцію, яка виводить 
+відмітки вузлів бінарного дерева, поданого у "стандартній формі", 
+по рівнях (починаючи з кореня дерева, далі з синів кореня й далі) */
+
