@@ -41,6 +41,25 @@ void toCompactList(list** head, list** tail) {
    що зберігається у "стандартній формі", вершини зі значенням v 
    та рівня, де розташована ця вершина. */
 
+bool findNodeOfBinaryTree(node* root, int num, int* height) {
+    if (!root) return false;
+
+    (*height)++;
+    if (root->num == num) {
+        cout << "Number: " << root->num << ", level: " << *height << endl;
+        return true;
+    }
+
+    bool foundInLeft = findNodeOfBinaryTree(root->left, num, height);
+    if (foundInLeft) return true;
+
+    bool foundInRight = findNodeOfBinaryTree(root->right, num, height);
+    if (foundInRight) return true;
+
+    (*height)--;
+    return false;
+}
+
 //task3
 /* Написати функцію, яка за матрицею суміжності графа будує його структуру суміжності */
 
