@@ -26,3 +26,19 @@ int getElementAtIndex(cListNode* cHead, int i) {
 /* Написати функцію для визначення кількості входження елементів менших за A
    до невпорядкованого бінарного дерева, що зберігається у "стандартній формі" */
 
+struct node {
+    int num;
+    node* left;
+    node* right;
+};
+
+void countLessThan(node* root, int number, int* count) {
+    if (!root) {
+        return;
+    }
+    if (root->num < number) {
+        (*count)++;
+    }
+    countLessThan(root->left, number, count);
+    countLessThan(root->right, number, count);
+}
