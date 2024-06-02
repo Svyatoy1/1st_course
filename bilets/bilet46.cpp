@@ -70,3 +70,31 @@ int findZerosFromTo(int i, int j, cListNode* head) {
     }
     return numberOfZeros;
 }
+
+int main () {
+	listNode* head = NULL;
+    listNode* tail = NULL;
+
+    head = new listNode{1, NULL, NULL};
+    tail = head;
+    tail->left = new listNode{0, NULL, tail};
+    tail = tail->left;
+    tail->left = new listNode{2, NULL, tail};
+    tail = tail->left;
+    tail->left = new listNode{0, NULL, tail};
+    tail = tail->left;
+    tail->left = new listNode{0, NULL, tail};
+    tail = tail->left;
+    tail->left = new listNode{3, NULL, tail};
+    tail = tail->left;
+
+    cListNode* cHead = NULL;
+    cListNode* cTail = NULL;
+    cListNew(&cHead, &cTail, head);
+    showCList(cHead);
+
+    int i = 1;
+    int j = 5;
+    int numberOfZeros = findZerosFromTo(i, j, cHead);
+    cout << "Number of zeros from index " << i << " to " << j << ": " << numberOfZeros << endl;
+}
