@@ -47,6 +47,8 @@ void printElementsBetweenMinAndMax(Node* head){
 відмітки вузлів бінарного дерева, поданого у "стандартній формі", 
 по рівнях (починаючи з кореня дерева, далі з синів кореня й далі) */
 
+//MAIN FUNCTION
+
 struct node {
     int num;
     node* left;
@@ -54,44 +56,78 @@ struct node {
 };
 
 struct stackTreeElement {
-	stackTree* next;
-	node* node;
+    stackTreeElement* next;
+    node* treeNode;
 };
 
-void stackTreeAdd(stackTreeElement** tail,node* node)
-{
-	stackTreeElement* temp = new stackTreeElement;
-	temp->next = NULL;
-	temp->node = node;
-	(*tail)->next = temp;
-	(*tail) = temp;
+void stackTreeAdd(stackTreeElement** tail, node* treeNode) {
+    stackTreeElement* temp = new stackTreeElement;
+    temp->next = NULL;
+    temp->treeNode = treeNode;
+
+    if (*tail) {
+        (*tail)->next = temp;
+    }
+    *tail = temp;
 }
 
-void stackTreeDelete(stackTreeElement** head, stackTreeElement** tail)
-{
-	stackTreeElement* temp = (*head);
-	if ((*head) == (*tail))
-	{
-		(*tail) = NULL;
-	}
-	(*head) = (*head)->next;
-	delete temp;
+void stackTreeDelete(stackTreeElement** head, stackTreeElement** tail) {
+    stackTreeElement* temp = *head;
+    if (*head == *tail) {
+        *tail = NULL;
+    }
+    *head = (*head)->next;
+    delete temp;
 }
 
-void stackTreeShow(node* root)
-{
-	stackTreeElement* head = new stackTreeElement;
-	head->next = NULL;
-	head->node = root;
-	stackTreeElement* tail = head;
+void stackTreeShow(node* root) {
+    if (!root) return;
 
-	while (head) {
-		if (head->node->left)
-			stackTreeAdd(&tail, head->node->left);
-		if (head->node->right)
-			stackTreeAdd(&tail, head->node->right);
-		cout << head->node->num << ", ";
-		stackTreeDelete(&head, &teil);
-	}
+    stackTreeElement* head = new stackTreeElement;
+    head->next = NULL;
+    head->treeNode = root;
+    stackTreeElement* tail = head;
 
+    bool firstElement = true; // To handle comma placement
+
+    while (head) {
+        node* currentNode = head->treeNode;
+        if (!firstElement) {
+            cout << ", ";
+        }
+        cout << currentNode->num;
+        firstElement = false;
+
+        if (currentNode->left)
+            stackTreeAdd(&tail, currentNode->left);
+        if (currentNode->right)
+            stackTreeAdd(&tail, currentNode->right);
+
+        stackTreeDelete(&head, &tail);
+    }
+    cout << endl;
+}
+
+// END OF MAIN FUNCTION
+
+node* createNode(int num) {
+    node* newNode = new node;
+    newNode->num = num;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+int main() {
+    node* root = createNode(1);
+    root->left = createNode(2);
+    root->right = createNode(3);
+    root->left->left = createNode(4);
+    root->left->right = createNode(5);
+    root->right->left = createNode(6);
+    root->right->right = createNode(7);
+
+    stackTreeShow(root);
+
+    return 0;
 }
