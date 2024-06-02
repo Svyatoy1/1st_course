@@ -42,3 +42,7 @@ void countLessThan(node* root, int number, int* count) {
     countLessThan(root->left, number, count);
     countLessThan(root->right, number, count);
 }
+
+//task3 
+/* Написати функцію, яка перевіряє зв'язніть неорієнтованого графа, поданого структурою суміжності */
+
