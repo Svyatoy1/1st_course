@@ -49,6 +49,7 @@ void cListNew(cListNode** cHead, cListNode** cTail, listNode* head) {
     }
 }
 
+//MAIN FUNCTION
 int findZerosFromTo(int i, int j, cListNode* head) {
     int counter = i;
     int numberOfZeros = 0;
