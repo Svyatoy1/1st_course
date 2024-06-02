@@ -6,13 +6,12 @@ struct nodeStack{
 	nodeStack* next;
 };
 
-void addNode (int value, nodeStack** head, nodeStack** tail){
+void addNode (int value, nodeStack** head){
 	nodeStack* temp = new nodeStack;
 	temp->num = value;
 	if ((*head)==NULL){
 		(*head) = temp;
-		(*tail) = (*head);
-		(*tail)->next = NULL;
+		(*head)->next = NULL;
 	}
 	else {
 		temp->next = *head;	
