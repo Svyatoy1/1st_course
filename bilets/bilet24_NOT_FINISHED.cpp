@@ -5,10 +5,17 @@ using namespace std;
 /* До лінійного списку F з m цілих чисел, більшість елементів якого дорівнює 0,
    застосоване стисле зберігання. Написати функцію для визначення i-го елемента списку */
 
-int getElementAtIndex(cListNode* cHead, int index) {
+struct cListNode {
+    int index;
+    int num;
+    cListNode* left;
+    cListNode* right;
+};
+
+int getElementAtIndex(cListNode* cHead, int i) {
     cListNode* temp = cHead;
     while (temp) {
-        if (temp->index == index) {
+        if (temp->index == i) {
             return temp->num;
         }
         temp = temp->left;
