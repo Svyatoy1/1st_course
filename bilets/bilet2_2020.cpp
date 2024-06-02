@@ -118,6 +118,23 @@ node* createNode(int num) {
     return newNode;
 }
 
+//task 3
+/* Написати функцію, що перевіря зв'язний граф, поданий "стурктурою суміжності", на ейлеровість */
+
+bool isEulerian(grph graph){
+   for (int i = 0; i<10; i++) { // assuming graph has 10 vertices
+      int step = 0;
+      node* temp = graph.arr[i];
+      while (temp){
+         step++;
+         temp = temp->next
+         }
+      if (step%2 != 0)
+         return false;
+      }
+      return true;
+}
+
 int main() {
     node* root = createNode(1);
     root->left = createNode(2);
