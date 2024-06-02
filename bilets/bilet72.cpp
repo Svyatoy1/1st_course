@@ -12,8 +12,7 @@ struct list{
    list* tail;
 };
 
-void toCompactList(list** head, list** tail)
-{
+void toCompactList(list** head, list** tail) {
 	list* start = (*head);
 	while (*head) {
 		if ((*head)->num == 0) {
@@ -22,22 +21,16 @@ void toCompactList(list** head, list** tail)
 				start = (*head)->left;
 				(*head) = (*head)->left;
 				(*head)->right = NULL;
-				delete temp;
-				continue;
 			}
 			else if ((*head)->left == NULL) {
 				(*tail) = (*tail)->right;
 				(*tail)->left = NULL;
 				(*head) = (*tail);
-				delete temp;
-				continue;
 			} 
-         else {
+       			else {
 				(*head)->left->right = (*head)->right;
 				(*head)->right->left = (*head)->left;
 				(*head) = (*head)->left;
-				delete temp;
-				continue;
 			}
 		}
 		(*head) = (*head)->left;
