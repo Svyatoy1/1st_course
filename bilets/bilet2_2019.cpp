@@ -30,3 +30,67 @@ nodeStack* insertionSort(nodeStack* head) {
     }
     return sorted;
 }
+
+//task2 
+/* Використовуючи відповідний механізм черг або стеків, написати функцію, яка виводить 
+відмітки вузлів бінарного дерева, поданого у "стандартній формі", 
+по рівнях (починаючи з кореня дерева, далі з синів кореня й далі) */
+
+struct node {
+    int num;
+    node* left;
+    node* right;
+};
+
+struct stackTreeElement {
+    stackTreeElement* next;
+    node* treeNode;
+};
+
+void stackTreeAdd(stackTreeElement** tail, node* treeNode) {
+    stackTreeElement* temp = new stackTreeElement;
+    temp->next = NULL;
+    temp->treeNode = treeNode;
+
+    if (*tail) {
+        (*tail)->next = temp;
+    }
+    *tail = temp;
+}
+
+void stackTreeDelete(stackTreeElement** head, stackTreeElement** tail) {
+    stackTreeElement* temp = *head;
+    if (*head == *tail) {
+        *tail = NULL;
+    }
+    *head = (*head)->next;
+    delete temp;
+}
+
+void stackTreeShow(node* root) {
+    if (!root) return;
+
+    stackTreeElement* head = new stackTreeElement;
+    head->next = NULL;
+    head->treeNode = root;
+    stackTreeElement* tail = head;
+
+    bool firstElement = true; // To handle comma placement
+
+    while (head) {
+        node* currentNode = head->treeNode;
+        if (!firstElement) {
+            cout << ", ";
+        }
+        cout << currentNode->num;
+        firstElement = false;
+
+        if (currentNode->left)
+            stackTreeAdd(&tail, currentNode->left);
+        if (currentNode->right)
+            stackTreeAdd(&tail, currentNode->right);
+
+        stackTreeDelete(&head, &tail);
+    }
+    cout << endl;
+}
