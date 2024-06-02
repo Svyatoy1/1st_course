@@ -13,15 +13,25 @@ struct cListNode{
 };
 
 int findZerosFromTo(int i, int j, cListNode* head){
-	int index = 1;
-	int counter = 0;
-	
-	while (head and head->index <= j)
-	{
-		if (head->index >= i)
+	int counter = 1;
+	int numberOfZeros = 0;
+
+	while (head){
+		if (head->right == NULL && ((head->index) - counter + 1) > i){
+			numberOfZeros++;
 			counter++;
+		}
+		if (head->right == NULL && ((head->index) - counter + 1) == i)
+			counter = 1;
+		if (head->index >= i && head->index <=j){
+			if (head->right && ((head->index) - counter) != (head->right->index)){
+				numberOfZeros++;
+				counter++;
+			}
+			counter = 1;
+		}
 		head = head->left;
 	}
 	
-	return j-i-counter+1 ;
+	return numberOfZeros;
 }
