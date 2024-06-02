@@ -13,29 +13,27 @@ struct list{
 };
 
 void toCompactList(list** head, list** tail) {
-	list* start = (*head);
-	while (*head) {
-		if ((*head)->num == 0) {
-			list* temp = (*head);
-			if ((*head)->right == NULL) {
-				start = (*head)->left;
-				(*head) = (*head)->left;
-				(*head)->right = NULL;
-			}
-			else if ((*head)->left == NULL) {
-				(*tail) = (*tail)->right;
-				(*tail)->left = NULL;
-				(*head) = (*tail);
-			} 
-       			else {
-				(*head)->left->right = (*head)->right;
-				(*head)->right->left = (*head)->left;
-				(*head) = (*head)->left;
-			}
-		}
-		(*head) = (*head)->left;
-	}
-	(*head) = start;
+    list* current = *head;
+
+    while (current) {
+        if (current->num == 0) {
+            if (current->prev) 
+                current->prev->next = current->next;
+            else 
+                *head = current->next;
+            
+            if (current->next) 
+                current->next->prev = current->prev;
+            else 
+                *tail = current->prev;
+            
+            list* temp = current;
+            current = current->next;
+            delete temp;
+        } 		
+	else
+            current = current->next;
+    }
 }
 
 //task2
