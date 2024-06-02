@@ -76,7 +76,54 @@ int findZerosFromTo(int i, int j, cListNode* head) {
 /* Написати функцію для обчислення значення виразу з цілих чисел та операцій "+", "*",
 записаного у формі ПОЛІЗ. Потрібний стек реалізуват власноруч */
 
+struct number{
+	int num;
+	number* next;
+};
+
+void numberAdd(number** head, int num){
+	number *temp = new number;
+	temp->num = num;
+	temp->next = *head;
+	*head = temp;
+}
+
+int numberGet(number** head){
+	int num;
+	num = (*head)->num;
+	number *temp = *head; 
+	*head = (*head)->next;
+	delete temp;
+	return num;
+}
+
+int countPOLIZ(char in[100]){
+	number* head = NULL;
+	for (int i = 0; in[i]; i++) {
+		if (in[i] != ' ') {
+			if (in[i]>47 and in[i]<58) {
+				int num = 0;
+				while (in[i]>47 and in[i]<58) {
+					num = num*10+in[i] - 48; 
+					i++;
+				}
+				numberAdd(&head, num);
+			}			
+			else {
+				int result;
+				if (in[i] == '+')
+				    result = numberGet(&head) + numberGet(&head);
+				else if (in[i] == '*')
+				    result = numberGet(&head) * numberGet(&head);  
+				numberAdd(&head, result);	  
+			}  
+		}
+	}
+	return head->num;
+}
+
 int main () {
+	//task1
     listNode* head = NULL;
     listNode* tail = NULL;
 
@@ -101,5 +148,14 @@ int main () {
     int i = 1;
     int j = 5;
     int numberOfZeros = findZerosFromTo(i, j, cHead);
-    cout << "Number of zeros from index " << i << " to " << j << ": " << numberOfZeros << endl;
+	cout << "Number of zeros from index " << i << " to " << j << ": " << numberOfZeros << endl;
+
+	//task2
+    	char in[100] = "20+35*2+30";
+	char out[100] = "";
+	cout << "input:  "<< in<<endl;
+	makePOLIZ(in, out);
+	cout << "output:  "<<out<<endl;
+        cout << "count result: " << countPOLIZ(out);
+	return 0;
 }
