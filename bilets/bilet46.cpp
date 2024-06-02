@@ -122,8 +122,14 @@ int countPOLIZ(char in[100]){
 	return head->num;
 }
 
+//task3
+/* Написати функцію, яка для орієнтованого графа будує орієнтований граф
+   з протилежною орієнтацією дуг. Графи представлені "структурами суміжності" */
+
+grph arcReverseOrientation
+
 int main () {
-	//task1
+//task1
     listNode* head = NULL;
     listNode* tail = NULL;
 
@@ -150,7 +156,7 @@ int main () {
     int numberOfZeros = findZerosFromTo(i, j, cHead);
 	cout << "Number of zeros from index " << i << " to " << j << ": " << numberOfZeros << endl;
 
-	//task2
+//task2
     	char in[100] = "20+35*2+30";
 	char out[100] = "";
 	cout << "input:  "<< in<<endl;
