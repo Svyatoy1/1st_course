@@ -47,47 +47,51 @@ void printElementsBetweenMinAndMax(Node* head){
 відмітки вузлів бінарного дерева, поданого у "стандартній формі", 
 по рівнях (починаючи з кореня дерева, далі з синів кореня й далі) */
 
-struct st
-{
-	stecT* next;
+struct node {
+    int num;
+    node* left;
+    node* right;
+};
+
+struct stackTreeElement {
+	stackTree* next;
 	node* node;
 };
 
-void stecTADD(stecT** teil,node* node)
+void stackTreeAdd(stackTreeElement** tail,node* node)
 {
-	stecT* temp = new stecT;
+	stackTreeElement* temp = new stackTreeElement;
 	temp->next = NULL;
 	temp->node = node;
-	(*teil)->next = temp;
-	(*teil) = temp;
+	(*tail)->next = temp;
+	(*tail) = temp;
 }
 
-void stecTDell(stecT** head,stecT** teil)
+void stackTreeDelete(stackTreeElement** head, stackTreeElement** tail)
 {
-	stecT* temp = (*head);
-	if ((*head) == (*teil))
+	stackTreeElement* temp = (*head);
+	if ((*head) == (*tail))
 	{
-		(*teil) = NULL;
+		(*tail) = NULL;
 	}
 	(*head) = (*head)->next;
 	delete temp;
 }
 
-void StecTShow(node* root)
+void stackTreeShow(node* root)
 {
-	stecT* head = new stecT;
+	stackTreeElement* head = new stackTreeElement;
 	head->next = NULL;
 	head->node = root;
-	stecT* teil = head;
+	stackTreeElement* tail = head;
 
-	while (head)
-	{
+	while (head) {
 		if (head->node->left)
-			stecTADD(&teil, head->node->left);
+			stackTreeAdd(&tail, head->node->left);
 		if (head->node->right)
-			stecTADD(&teil, head->node->right);
+			stackTreeAdd(&tail, head->node->right);
 		cout << head->node->num << ", ";
-		stecTDell(&head, &teil);
+		stackTreeDelete(&head, &teil);
 	}
 
 }
