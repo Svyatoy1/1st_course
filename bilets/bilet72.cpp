@@ -1,7 +1,17 @@
 #include <iostream>
 using namespace std;
 
+//task3
+/* Написати функцію, яка за матрицею суміжності графа будує його структуру суміжності */
 
+struct node {
+    int num; // index of matrix column
+    node* next; // pointer to next element in the same row
+};
+
+struct grph {
+    node* arr[8];
+};
 
 grph matrixToStruct(int mtr[8][8]){
     grph graph;
