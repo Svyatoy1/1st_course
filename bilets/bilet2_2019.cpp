@@ -94,3 +94,24 @@ void stackTreeShow(node* root) {
     }
     cout << endl;
 }
+
+//task3 
+/* Написати функцію для знаходження середнього арифметичного елементів
+розрідженої матриці В[20,50] при послідовно-зв'язному індексному зберіганні */
+
+double findMiddleElement (matrix* headM) {
+    double number = 0;
+    int count;
+	while (headM) {
+		listI* temp = headM->list;
+		while (temp) {
+			number += temp->num;
+            count++;
+			temp = temp->left;
+		}
+		headM = headM->next;
+	}
+    if (number != 0)
+    	return (number / count);
+    return 0;
+}
