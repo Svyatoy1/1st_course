@@ -126,7 +126,43 @@ int countPOLIZ(char in[100]){
 /* Написати функцію, яка для орієнтованого графа будує орієнтований граф
    з протилежною орієнтацією дуг. Графи представлені "структурами суміжності" */
 
-grph arcReverseOrientation
+struct node {
+    int num; // index of matrix column
+    node* next; // pointer to next element in the same row
+};
+
+struct grph {
+    node* arr[8];
+};
+
+grph arcReverseOrientation (grph graph){
+	grph* reverse = new grph;
+	for (int i=0; i<10; i++)
+		reverse->arr[i] = NULL;
+
+	for (int i=0; i<10; i++) {
+		node* temp = graph.arr[i];
+		while (temp){
+			node* number = new node;
+			number->num = i+1;
+			number->next = NULL;
+
+			node** added = &(reverse->arr[temp->num - 1];
+
+			if (*added == NULL)
+				*added = number;
+			else {
+				node* start = (*added);
+            			while ((*added)->next)
+                    			(*added) = (*added)->next;
+               			(*added)->next = number;
+               			(*added) = start;
+			}
+			temp = temp->next;
+		}
+	}
+	return reverse;
+}
 
 int main () {
 //task1
