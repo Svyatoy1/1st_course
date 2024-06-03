@@ -62,3 +62,20 @@ void findDerivative(list** head, list** tail) {
 }
 
 //task 2
+struct cListNode {
+    int index;
+    int num;
+    cListNode* left;
+    cListNode* right;
+};
+
+int getElementAtIndex(cListNode* cHead, int i) {
+    cListNode* temp = cHead;
+    while (temp) {
+        if (temp->index == i) {
+            return temp->num;
+        }
+        temp = temp->left;
+    }
+    return 0; // якщо елемент з таким індексом не знайдено, повертаємо 0
+}
