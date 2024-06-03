@@ -22,7 +22,7 @@ void AddElementInList(list** head, list** tail, int number) {
 
 void CopyList(list* head, list* tail, list** headc, list** tailc) {
 	do {
-		AddOB(headc, tailc, tail->num);
+		AddElementInList(headc, tailc, tail->num);
 		tail = tail->right;
 	} while 
       (tail != head->right);
