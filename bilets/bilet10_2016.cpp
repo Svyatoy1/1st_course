@@ -1,6 +1,10 @@
 #include <iostream>
 using namespace std;
 
+//task1
+/* В елементах циклічного списку розміщені цілі числа. Написати функцію копіювання списку, 
+помінявши порядок елементів на оберенений*/
+
 void AddElementInList(list** head, list** tail, int number) {
 	list* temp = new list;
 	temp->num = number;
