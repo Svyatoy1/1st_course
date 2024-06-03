@@ -85,3 +85,17 @@ bool findNodeOfBinaryTree(node* root, int num) {
 	
     return false;
 }
+
+//task4
+int findMinMoreThanA(node* root, int a) {
+    int minVal = -1; // Початкове значення, яке вказує на відсутність результату
+    while (root) {
+        if (root->num > a) {
+            minVal = root->num;
+            root = root->left;
+        } else {
+            root = root->right;
+        }
+    }
+    return minVal;
+}
