@@ -129,7 +129,6 @@ void addEdge(grph &mst, int u, int v) {
 
 void DFSForSpanningTree(grph &graph, int active, bool check[8], grph &mst) {
     check[active - 1] = true;
-
     node* temp = graph.arr[active - 1];
     while (temp) {
         if (!check[temp->num - 1]) {
@@ -154,3 +153,10 @@ grph findSpanningTree(grph &graph) {
 //task5
 /* Написати функцію для об'єднання двох дерев двійкового пошуку зі значеннями
 у деревах відповідно <K та >=K */
+node* unionTrees(node* MinTree, node* BigTree, int K) {
+	node* NewTree = new node;
+	NewTree->num = K;
+	NewTree->left = MinTree;
+	NewTree->right = BigTree;
+	return NewTree;
+}
