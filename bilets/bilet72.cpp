@@ -6,6 +6,15 @@ using namespace std;
    своїм зв'язним зберіганням. Написати функцію для представлення F 
    "стислим зв'язним зберіганням". */
 
+//task2
+/* Написати функцію для знаходження у невпорядкованому бінарному дереві,
+   що зберігається у "стандартній формі", вершини зі значенням v 
+   та рівня, де розташована ця вершина. */
+
+//task3
+/* Написати функцію, яка за матрицею суміжності графа будує його структуру суміжності */
+
+//task1
 struct list{
    int num;
    list* left;
@@ -37,10 +46,6 @@ void toCompactList(list** head, list** tail) {
 }
 
 //task2
-/* Написати функцію для знаходження у невпорядкованому бінарному дереві,
-   що зберігається у "стандартній формі", вершини зі значенням v 
-   та рівня, де розташована ця вершина. */
-
 bool findNodeOfBinaryTree(node* root, int num, int* height) {
     if (!root) return false;
 
@@ -61,8 +66,6 @@ bool findNodeOfBinaryTree(node* root, int num, int* height) {
 }
 
 //task3
-/* Написати функцію, яка за матрицею суміжності графа будує його структуру суміжності */
-
 struct node {
     int num; // index of matrix column
     node* next; // pointer to next element in the same row
