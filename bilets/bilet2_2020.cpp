@@ -5,6 +5,15 @@ using namespace std;
 /* В елементах зв'язного списку розміщені різні цілі числа. Написати функцію, що роздруковує
    значення елементів, розміщених між найменшим та найбільшим елементами списку */
 
+//task2 
+/* Використовуючи відповідний механізм черг або стеків, написати функцію, яка виводить 
+відмітки вузлів бінарного дерева, поданого у "стандартній формі", 
+по рівнях (починаючи з кореня дерева, далі з синів кореня й далі) */
+
+//task 3
+/* Написати функцію, що перевіря зв'язний граф, поданий "стурктурою суміжності", на ейлеровість */
+
+//task1
 void printElementsBetweenMinAndMax(Node* head){
     Node* current = head;
     int minIndex = 0;
@@ -43,12 +52,6 @@ void printElementsBetweenMinAndMax(Node* head){
 }
 
 //task2 
-/* Використовуючи відповідний механізм черг або стеків, написати функцію, яка виводить 
-відмітки вузлів бінарного дерева, поданого у "стандартній формі", 
-по рівнях (починаючи з кореня дерева, далі з синів кореня й далі) */
-
-//MAIN FUNCTION
-
 struct node {
     int num;
     node* left;
@@ -108,19 +111,7 @@ void stackTreeShow(node* root) {
     cout << endl;
 }
 
-// END OF MAIN FUNCTION
-
-node* createNode(int num) {
-    node* newNode = new node;
-    newNode->num = num;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    return newNode;
-}
-
 //task 3
-/* Написати функцію, що перевіря зв'язний граф, поданий "стурктурою суміжності", на ейлеровість */
-
 bool isEulerian(grph graph){
    for (int i = 0; i<10; i++) { // assuming graph has 10 vertices
       int step = 0;
