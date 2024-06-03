@@ -79,3 +79,5 @@ int getElementAtIndex(cListNode* cHead, int i) {
     }
     return 0; // якщо елемент з таким індексом не знайдено, повертаємо 0
 }
+
+//task 3
