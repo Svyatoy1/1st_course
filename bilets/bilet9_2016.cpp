@@ -97,3 +97,17 @@ void countMoreThan(node* root, int number, int* count) {
     countLessThan(root->left, number, count);
     countLessThan(root->right, number, count);
 }
+
+//task 4
+int findMaxLessThanA(node* root, int a) {
+    int maxVal = -1; // Початкове значення, яке вказує на відсутність результату
+    while (root) {
+        if (root->num < a) {
+            maxVal = root->num;
+            root = root->right;
+        } else {
+            root = root->left;
+        }
+    }
+    return maxVal;
+}
