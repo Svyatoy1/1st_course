@@ -73,3 +73,81 @@ void breaks(list** head_neparni, list** tail_neparni, list** head_parni, list** 
 //task 2
 
 //task 3
+struct Node {
+    int value;
+    Node* left;
+    Node* right;
+};
+
+struct NodeStack {
+    Node* node;
+    NodeStack* next;
+};
+
+void addNodeInStack(NodeStack** stack, Node* node) {
+    NodeStack* newStackNode = new NodeStack;
+    newStackNode->node = node;
+    newStackNode->next = *stack;
+    *stack = newStackNode;
+}
+
+Node* pop(NodeStack** stack) {
+    if (*stack == NULL) {
+        return NULL;
+    }
+    NodeStack* topNode = *stack;
+    Node* treeNode = topNode->node;
+    *stack = topNode->next;
+    delete topNode;
+    return treeNode;
+}
+
+void reversePostOrder(Node* root) {
+    if (root == NULL) 
+        return;
+        
+    NodeStack* stack1 = NULL;
+    NodeStack* stack2 = NULL;
+
+    addNodeInStack(&stack1, root);
+
+	// обхід дерева в оберненому порядку
+    while (stack1) {
+        Node* node = pop(&stack1);
+        addNodeInStack(&stack2, node);
+        if (node->left) 
+            addNodeInStack(&stack1, node->left);
+        if (node->right) 
+            addNodeInStack(&stack1, node->right);
+	}
+	
+	// вивід порядку вузлів
+    while (stack2) {
+        Node* node = pop(&stack2);
+        cout << node->value << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    // for testing task 3
+    Node* root = new Node{1, NULL, NULL};
+    root->left = new Node{2, NULL, NULL};
+    root->right = new Node{3, NULL, NULL};
+    root->left->left = new Node{4, NULL, NULL};
+    root->left->right = new Node{5, NULL, NULL};
+    root->right->left = new Node{6, NULL, NULL};
+    root->right->right = new Node{7, NULL, NULL};
+
+    reversePostOrder(root);
+
+    delete root->left->left;
+    delete root->left->right;
+    delete root->right->left;
+    delete root->right->right;
+    delete root->left;
+    delete root->right;
+    delete root;
+
+    return 0;
+}
