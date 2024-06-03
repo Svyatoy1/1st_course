@@ -120,3 +120,37 @@ double findMiddleElement (matrix* headM) {
 /* Написати функцію для побудови кістякового дерева графа пошуком в глибину.
 Граф представлений структурою суміжності */
 
+void addEdge(grph &mst, int u, int v) {
+    node* newNode = new node;
+    newNode->num = v;
+    newNode->next = mst.arr[u - 1];
+    mst.arr[u - 1] = newNode;
+}
+
+void DFSForSpanningTree(grph &graph, int active, bool check[8], grph &mst) {
+    check[active - 1] = true;
+
+    node* temp = graph.arr[active - 1];
+    while (temp) {
+        if (!check[temp->num - 1]) {
+            addEdge(mst, active, temp->num);
+            addEdge(mst, temp->num, active);
+            DFSForSpanningTree(graph, temp->num, check, mst);
+        }
+        temp = temp->next;
+    }
+}
+
+grph findSpanningTree(grph &graph) {
+    grph mst;
+    for (int i = 0; i < 8; i++) {
+        mst.arr[i] = NULL;
+    }
+    bool check[8] = {false};
+    DFSForSpanningTree(graph, 1, check, mst); // Починаємо з вузла 1 (можна вибрати будь-який стартовий вузол)
+    return mst;
+}
+
+//task5
+/* Написати функцію для об'єднання двох дерев двійкового пошуку зі значеннями
+у деревах відповідно <K та >=K */
