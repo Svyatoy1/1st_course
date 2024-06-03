@@ -115,3 +115,8 @@ double findMiddleElement (matrix* headM) {
     	return (number / count);
     return 0;
 }
+
+//task4 
+/* Написати функцію для побудови кістякового дерева графа пошуком в глибину.
+Граф представлений структурою суміжності */
+
