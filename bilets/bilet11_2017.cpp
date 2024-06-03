@@ -71,6 +71,36 @@ void breaks(list** head_neparni, list** tail_neparni, list** head_parni, list** 
 }
 
 //task 2
+struct NumberNode {
+    int value;
+    NumberNode* next;
+};
+
+struct IndexNode {
+    int key; // Äâ³ îñòàíí³ öèôðè
+    IndexNode* next; // Íàñòóïíèé ³íäåêñíèé âóçîë
+    NumberNode* sublist; // Ï³äñïèñîê ÷èñåë
+};
+
+int countOccurrences(IndexNode* head, int value) {
+    int key = value % 100; // Îòðèìóºìî äâ³ îñòàíí³ öèôðè
+
+    IndexNode* current = head;
+    while (current && current->key != key) 
+        current = current->next;
+
+    if (current == NULL) 
+        return 0; // Ï³äñïèñîê ç òàêèìè äâîìà îñòàíí³ìè öèôðàìè íå çíàéäåíî
+    
+    NumberNode* sublist = current->sublist;
+    int count = 0;
+    while (sublist) {
+        if (sublist->value == value) 
+            count++;
+        sublist = sublist->next;
+    }
+    return count;
+}
 
 //task 3
 struct Node {
