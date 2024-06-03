@@ -111,3 +111,26 @@ int findMaxLessThanA(node* root, int a) {
     }
     return maxVal;
 }
+
+//task5
+void DFS(int graph[N][N], int vertex, bool visited[N]) {
+    visited[vertex] = true;
+    for (int i = 0; i < N; ++i) {
+        if (graph[vertex][i] == 1 && !visited[i]) {
+            DFS(graph, i, visited);
+        }
+    }
+}
+
+bool isConnected(int graph[N][N]) {
+    bool visited[N] = {false};
+    // Починаємо DFS з першої вершини (0)
+    DFS(graph, 0, visited);
+    // Перевіряємо, чи всі вершини відвідані
+    for (int i = 0; i < N; ++i) {
+        if (!visited[i]) {
+            return false; // Якщо знайдена не відвідана вершина, граф не зв'язний
+        }
+    }
+    return true;
+}
