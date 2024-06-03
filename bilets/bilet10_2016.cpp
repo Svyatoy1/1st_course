@@ -63,3 +63,21 @@ int findZerosFromTo(int i, int j, cListNode* head) {
     }
     return numberOfZeros;
 }
+
+//task3
+bool findNodeOfBinaryTree(node* root, int num) {
+    if (!root) return false;
+
+    if (root->num == num) {
+        cout << "Number: " << root->num << ", level: " << *height << endl;
+        return true;
+    }
+
+    bool foundInLeft = findNodeOfBinaryTree(root->left, num);
+    if (foundInLeft) return true;
+
+    bool foundInRight = findNodeOfBinaryTree(root->right, num);
+    if (foundInRight) return true;
+	
+    return false;
+}
