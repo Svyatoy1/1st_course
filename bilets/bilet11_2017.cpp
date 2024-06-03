@@ -69,3 +69,7 @@ void breaks(list** head_neparni, list** tail_neparni, list** head_parni, list** 
 		} while ((*tail_neparni)->left != (*head_neparni));
 	}
 }
+
+//task 2
+
+//task 3
