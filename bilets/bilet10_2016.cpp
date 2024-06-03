@@ -1,29 +1,29 @@
 #include <iostream>
 using namespace std;
 
-void AddElementInList(list** head, list** teil, int number) {
+void AddElementInList(list** head, list** tail, int number) {
 	list* temp = new list;
 	temp->num = number;
 	if (*head) {
 		(*head)->right = temp;
-		(*teil)->left = temp;
+		(*tail)->left = temp;
 		temp->left = (*head);
-		temp->right = (*teil);
-		(*teil) = temp;
+		temp->right = (*tail);
+		(*tail) = temp;
 	} else {
-		(*teil) = temp;
-		(*head) = (*teil);
-		(*head)->left = (*teil);
-		(*head)->right = (*teil);
-		(*teil)->left = (*head);
-		(*teil)->right = (*head);
+		(*tail) = temp;
+		(*head) = (*tail);
+		(*head)->left = (*tail);
+		(*head)->right = (*tail);
+		(*tail)->left = (*head);
+		(*tail)->right = (*head);
 	}
 }
 
-void CopyList(list* head, list* teil, list** headc, list** teilc) {
+void CopyList(list* head, list* tail, list** headc, list** tailc) {
 	do {
-		AddOB(headc, teilc, teil->num);
-		teil = teil->right;
+		AddOB(headc, tailc, tail->num);
+		tail = tail->right;
 	} while 
-      (teil != head->right);
+      (tail != head->right);
 }
