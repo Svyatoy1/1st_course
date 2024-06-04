@@ -88,9 +88,8 @@ int findMinInTree(node* root) {
 int countIsolatedVertices(grph graph) {
     int isolatedCount = 0;
     for (int i = 0; i < 8; i++) {
-        if (graph.arr[i] == NULL) {
+        if (graph.arr[i] == NULL)
             isolatedCount++;
-        }
     }
     return isolatedCount;
 }
