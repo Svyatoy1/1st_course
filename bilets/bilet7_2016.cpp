@@ -79,3 +79,13 @@ int countIsolatedVertices(int graph[8][8]) {
 }
 
 //task4
+void numberOfInternalNodes(node* root, int* number) {
+    if (!root) 
+        return;
+	
+    if (root->left || root->right) 
+        (*number)++;
+	
+    numberOfInternalNodes(root->left, number);
+    numberOfInternalNodes(root->right, number);
+}
