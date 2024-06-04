@@ -21,15 +21,15 @@ struct listNode {
     listNode* right;
 };
 
-struct cListNode{
+struct CompactNode{
 	int index;
 	int num;
-	cListNode *left;
-	cListNode *right;
+	CompactNode *left;
+	CompactNode *right;
 };
 
-void cListAdd(int value, int index, cListNode** head, cListNode** tail) {
-    cListNode* temp = new cListNode;
+void cListAdd(int value, int index, CompactNode** head, CompactNode** tail) {
+    CompactNode* temp = new CompactNode;
     temp->num = value;
     temp->index = index;
 
@@ -46,7 +46,7 @@ void cListAdd(int value, int index, cListNode** head, cListNode** tail) {
     }
 }
 
-void cListNew(cListNode** cHead, cListNode** cTail, listNode* head) {
+void cListNew(CompactNode** cHead, CompactNode** cTail, listNode* head) {
     listNode* temp = head;
     int index = 1;
 
@@ -60,25 +60,21 @@ void cListNew(cListNode** cHead, cListNode** cTail, listNode* head) {
 }
 
 //MAIN FUNCTION
-int findZerosFromTo(int i, int j, cListNode* head) {
-    int counter = i;
-    int numberOfZeros = 0;
-    while (head && head->index <= j) {
-        if (head->index >= i) {
-            while (counter < head->index) {
-                numberOfZeros++;
-                counter++;
-            }
-            counter++; // move to the next expected index
+int findZerosFromTo(CompactNode* head, int i, int j){
+    int nodesWithNonZeroValue = 0;
+    CompactNode* current = head;
+    while (current) {
+        if(current->index >= i && current->index < j){
+            nodesWithNonZeroValue++;
+            current = current->left;
+        }else if(current->index == j){
+            nodesWithNonZeroValue++;
+            break;
+        } else {
+            break;
         }
-        head = head->left;
     }
-    // Account for any remaining zeros in the range
-    while (counter <= j) {
-        numberOfZeros++;
-        counter++;
-    }
-    return numberOfZeros;
+    return j-i-nodesWithNonZeroValue+1;
 }
 
 //task2
@@ -186,15 +182,14 @@ int main () {
     tail->left = new listNode{3, NULL, tail};
     tail = tail->left;
 
-    cListNode* cHead = NULL;
-    cListNode* cTail = NULL;
+    CompactNode* cHead = NULL;
+    CompactNode* cTail = NULL;
     cListNew(&cHead, &cTail, head);
-    showCList(cHead);
 
     int i = 1;
     int j = 5;
-    int numberOfZeros = findZerosFromTo(i, j, cHead);
-	cout << "Number of zeros from index " << i << " to " << j << ": " << numberOfZeros << endl;
+    int numberOfZeros = findZerosFromTo(cHead, i, j);
+	cout << "quantity of zeroes: " << numberOfZeros << '\n'; 
 
 //task2
     	char in[100] = "20+35*2+30";
