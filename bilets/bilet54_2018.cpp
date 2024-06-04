@@ -6,14 +6,17 @@ using namespace std;
 впорядкованим за зростанням степені змінної, без зберігання одночленів із з нульовими 
 коефіцієнтами. Написати функцію, яка виводить степінь многочлена */
 
-//task 2
+//task2
 /* До лінійного списку F з m цілих чисел, більшість елементів якого дорівнюють 0,
    застосоване стисле зв'язне зберігання. Написати функцію для визначення номера
    першого за порядком елемента списку F із значенням 0 */
 
-//task 3
+//task3
 /* Написати функцію для визначення кількості вхдження елементів більших за а
 до невпорядкованого бінарного дерева, що зберігається у стандартній формі */
+
+//task4
+/* Написати функцію для визначення найменшого значення у вузлах непорожнього дерева бінарного пошуку */
 
 //task1
 struct Node {
@@ -53,7 +56,6 @@ int findFirstZero(Node* head, int m) {
 }
 
 //task3
-//task 3
 struct node {
     int num;
     node* left;
@@ -69,4 +71,11 @@ void countMoreThan(node* root, int number, int* count) {
     }
     countLessThan(root->left, number, count);
     countLessThan(root->right, number, count);
+}
+
+//task4
+int findMinInTree(node* root) {
+	if (root->left == NULL)
+		return root->num;
+	return findMinInTree(root->left);
 }
