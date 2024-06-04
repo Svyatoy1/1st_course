@@ -56,3 +56,20 @@ int searchMaxElement (row* headM){
 	}
 	return max;
 }
+
+//task3
+int countIsolatedVertices(int graph[8][8]) {
+    int isolatedCount = 0;
+    for (int i = 0; i < 8; ++i) {
+        bool isIsolated = true;
+        for (int j = 0; j < 8; ++j) {
+            if (graph[i][j] == 1) {
+                isIsolated = false;
+                break;
+            }
+        }
+        if (isIsolated) 
+            isolatedCount++;
+    }
+    return isolatedCount;
+}
