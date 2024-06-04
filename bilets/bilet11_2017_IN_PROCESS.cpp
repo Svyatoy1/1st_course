@@ -86,20 +86,20 @@ struct NumberNode {
 };
 
 struct IndexNode {
-    int key; // Äâ³ îñòàíí³ öèôðè
-    IndexNode* next; // Íàñòóïíèé ³íäåêñíèé âóçîë
-    NumberNode* sublist; // Ï³äñïèñîê ÷èñåë
+    int key; 
+    IndexNode* next; 
+    NumberNode* sublist; 
 };
 
 int countOccurrences(IndexNode* head, int value) {
-    int key = value % 100; // Îòðèìóºìî äâ³ îñòàíí³ öèôðè
+    int key = value % 100; 
 
     IndexNode* current = head;
     while (current && current->key != key) 
         current = current->next;
 
     if (current == NULL) 
-        return 0; // Ï³äñïèñîê ç òàêèìè äâîìà îñòàíí³ìè öèôðàìè íå çíàéäåíî
+        return 0; // 
     
     NumberNode* sublist = current->sublist;
     int count = 0;
@@ -150,7 +150,7 @@ void reversePostOrder(Node* root) {
 
     addNodeInStack(&stack1, root);
 
-	// обхід дерева в оберненому порядку
+ // обхід дерева в оберненому порядку
     while (stack1) {
         Node* node = pop(&stack1);
         addNodeInStack(&stack2, node);
@@ -182,6 +182,23 @@ int sumGreaterThan(Node* root, int v) {
         sum += sumGreaterThan(root->right, v);
 	
     return sum;
+}
+
+//task5
+int countDegreeThreeVertices(grph graph) {
+    int count = 0;
+
+    for (int i = 0; i < 8; i++) {
+        int degree = 0;
+        node* temp = graph.arr[i];
+        while (temp) {
+            degree++;
+            temp = temp->next;
+        }
+        if (degree == 3) 
+            count++;
+    } 
+    return count;
 }
 
 int main() {
