@@ -47,3 +47,22 @@ int findFirstZero(Node* head, int m) {
      else 
         return -1;
 }
+
+//task3
+//task 3
+struct node {
+    int num;
+    node* left;
+    node* right;
+};
+
+void countMoreThan(node* root, int number, int* count) {
+    if (!root) {
+        return;
+    }
+    if (root->num > number) {
+        (*count)++;
+    }
+    countLessThan(root->left, number, count);
+    countLessThan(root->right, number, count);
+}
