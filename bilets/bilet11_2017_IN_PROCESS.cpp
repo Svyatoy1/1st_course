@@ -15,6 +15,10 @@ using namespace std;
 /* Написати не рекурсивну функцію (з використанням стека) для друкування відміток вузлів 
 бінарного дерева поданого у стандартній формі, при його проходженні в оберненому порядку */
 
+//task4
+/* Написати функцію, щоб обчсилює суму числових значень у вершмнах дерева двійкового
+пошуку більших за v */
+
 //task1
 struct list {
 	int num;
@@ -157,6 +161,20 @@ void reversePostOrder(Node* root) {
         cout << node->value << " ";
     }
     cout << endl;
+}
+
+//task4
+int rol(node* root)
+{
+	if (root->left == NULL)
+		return root->num;
+	if(root->left)
+		rol(root->left);
+}
+
+void searchMinNum(node* root)
+{
+	cout << "Min number in your tree is: " << rol(root) << endl;
 }
 
 int main() {
