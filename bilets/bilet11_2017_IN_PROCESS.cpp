@@ -164,17 +164,19 @@ void reversePostOrder(Node* root) {
 }
 
 //task4
-int rol(node* root)
-{
-	if (root->left == NULL)
-		return root->num;
-	if(root->left)
-		rol(root->left);
-}
+int sumGreaterThan(Node* root, int v) {
+    if (root == NULL)
+        return 0;
 
-void searchMinNum(node* root)
-{
-	cout << "Min number in your tree is: " << rol(root) << endl;
+    int sum = 0;
+    if (root->num > v) {
+        sum += root->num;
+        sum += sumGreaterThan(root->right, v);
+        sum += sumGreaterThan(root->left, v);
+    } else
+        sum += sumGreaterThan(root->right, v);
+	
+    return sum;
 }
 
 int main() {
