@@ -18,6 +18,10 @@ using namespace std;
 //task4
 /* Написати функцію для визначення найменшого значення у вузлах непорожнього дерева бінарного пошуку */
 
+//task5
+/* Написати функцію, яка визначає кількість ізольованих вершин неорієнтованого графа, 
+поданого структурою суміжності */
+
 //task1
 struct Node {
     int coefficient; 
@@ -78,4 +82,15 @@ int findMinInTree(node* root) {
 	if (root->left == NULL)
 		return root->num;
 	return findMinInTree(root->left);
+}
+
+//task5
+int countIsolatedVertices(grph graph) {
+    int isolatedCount = 0;
+    for (int i = 0; i < 8; i++) {
+        if (graph.arr[i] == NULL) {
+            isolatedCount++;
+        }
+    }
+    return isolatedCount;
 }
