@@ -17,6 +17,9 @@ using namespace std;
 /* Написати функцію, яка визначає кількість внутрішніх вершин бінарного дерева, 
 що представлено у стандартній формі */
 
+//task5
+/* Написати функцію для копіювання АВЛ-дерева */
+
 //task1
 void multilicationOfLists(list* head1, list* head2) {
 	while (head1 && head2) {
@@ -88,4 +91,24 @@ void numberOfInternalNodes(node* root, int* number) {
 	
     numberOfInternalNodes(root->left, number);
     numberOfInternalNodes(root->right, number);
+}
+
+//task5
+void copyAVL(node* parent, node* current){
+	if (parent->left) {
+		node* temp = new node;
+		temp->data = parent->left->data;
+		temp->left = NULL;
+		temp->right = NULL;
+		current->left = temp;
+		copyAVL(parent->left, current->left);
+	}
+	if (parent->right) {
+		node* temp = new node;
+		temp->data = parent->right->data;
+		temp->left = NULL;
+		temp->right = NULL;
+		current->right = temp;
+		copyAVL(parent->right, current->right);
+	}
 }
