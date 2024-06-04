@@ -5,6 +5,10 @@ using namespace std;
 /* Написати функцію, яка для двох скінченних множин цілих чисел, 
 поданих зв'язними впорядкованими списками, знаходить їхній перетин*/
 
+//task2
+/* Написати функцію, яка для двох скінченних множин цілих чисел, 
+поданих зв'язними впорядкованими списками, знаходить їхній перетин*/
+
 //task1
 void multilicationOfLists(list* head1, list* head2) {
 	while (head1 && head2) {
@@ -20,4 +24,31 @@ void multilicationOfLists(list* head1, list* head2) {
     }
 	}
 	cout << endl;
+}
+
+//task2
+// Структура для представлення елемента в рядку
+struct listI {
+    int num;
+    listI* next;
+};
+
+// Структура для представлення рядка в матриці
+struct row {
+    listI* node;
+    row* next;
+};
+
+int searchMaxElement (row* headM){
+	int max = headM->node->num;
+	while (headM) {
+		listI* temp = headM->node;
+		while (temp){
+			if (temp->num > max)
+				max = temp->num;
+			temp = temp->next;
+		}
+		headM = headM->next;
+	}
+	return max;
 }
