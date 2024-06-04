@@ -13,6 +13,10 @@ using namespace std;
 /* Написати функцію, яка визначає кількість ізольованих вершин неорієнтованого графа, 
 поданого матрицею суміжності */
 
+//task4
+/* Написати функцію, яка визначає кількість внутрішніх вершин бінарного дерева, 
+що представлено у стандартній формі */
+
 //task1
 void multilicationOfLists(list* head1, list* head2) {
 	while (head1 && head2) {
@@ -73,3 +77,5 @@ int countIsolatedVertices(int graph[8][8]) {
     }
     return isolatedCount;
 }
+
+//task4
