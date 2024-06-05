@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+// для розміру графу можемо замість const int можемо ставити у функціях graphArraySize
+
 struct node {
     int num; // index of matrix column
     node* next; // pointer to next element in the same row
