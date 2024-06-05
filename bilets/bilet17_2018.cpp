@@ -74,3 +74,17 @@ bool findNodeOfBinaryTree(node* root, int num) {
 	
     return false;
 }
+
+//task 4
+int findMaxLessThanV(node* root, int v) {
+    int maxVal = -1; // Початкове значення, яке вказує на відсутність результату
+    while (root) {
+        if (root->num < v) {
+            maxVal = root->num;
+            root = root->right;
+        } else {
+            root = root->left;
+        }
+    }
+    return maxVal;
+}
