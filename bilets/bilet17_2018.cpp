@@ -96,8 +96,8 @@ int findMaxLessThanV(node* root, int v) {
 //task5
 int countEdges(grph* Graph) {
     int count = 0;
-    for (int i = 0; i < 8; i++) {
-        Node* temp = Graph->adjLists[i];
+    for (int i = 0; i < 8; i++) { //assuming we have 8 nodes in graph
+        Node* temp = = Graph.arr[i];
         while (temp) {
             count++;
             temp = temp->next;
