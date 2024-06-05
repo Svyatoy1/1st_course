@@ -67,12 +67,12 @@ struct node {
 };
 
 void countMoreThan(node* root, int number, int* count) {
-    if (!root) {
+    if (!root)  
         return;
-    }
-    if (root->num > number) {
+	
+    if (root->num > number) 
         (*count)++;
-    }
+    
     countLessThan(root->left, number, count);
     countLessThan(root->right, number, count);
 }
