@@ -5,6 +5,10 @@ using namespace std;
 /* В елементах двозв'язного списку розміщені цілі числа. Написати функцію, що вилучає 
 всі елементи з мінімальним значенням */
 
+//task2
+/* Список F з цілих чисел, більшість елементів якого дорівнює 0, представлений своїм зв'язним зберіганням. 
+Написати функцію для представлення F стислим зв'язним зберіганням */
+
 //task1
 // Функція для знаходження мінімального значення в списку
 int findMin(Node* head) {
@@ -50,4 +54,34 @@ void deleteMinElements(Node** head) {
             deleteNode(head, current);
         current = next;
     }
+}
+
+//task2
+void fromListToCompactList(list** head, list** tail) {
+	list* start = (*head);
+	while (*head) {
+		if ((*head)->num == 0) {
+			list* temp = (*head);
+			if ((*head)->right == NULL) {
+				start = (*head)->left;
+				(*head) = (*head)->left;
+				(*head)->right = NULL;
+				delete temp;
+			}
+			else if ((*head)->left == NULL) {
+				(*tail) = (*tail)->right;
+				(*tail)->left = NULL;
+				(*head) = (*tail);
+				delete temp;
+			} 
+            else {
+				(*head)->left->right = (*head)->right;
+				(*head)->right->left = (*head)->left;
+				(*head) = (*head)->left;
+				delete temp;
+			}
+		}
+		(*head) = (*head)->left;
+	}
+	(*head) = start;
 }
