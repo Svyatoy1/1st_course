@@ -86,3 +86,15 @@ void fromListToCompactList(list* head, cListNode** cHead, cListNode** cTail) {
         index++;
     }
 }
+
+//task3
+int countInRange(Node* root, int u, int v) {
+    if (root == NULL) 
+        return 0;
+    
+    int count = 0;
+    if (root->num >= u && root->num <= v) 
+        count = 1;
+    
+    return count + countInRange(root->left, u, v) + countInRange(root->right, u, v);
+}
