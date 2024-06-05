@@ -57,31 +57,28 @@ void deleteMinElements(Node** head) {
 }
 
 //task2
-void fromListToCompactList(list** head, list** tail) {
-	list* start = (*head);
-	while (*head) {
-		if ((*head)->num == 0) {
-			list* temp = (*head);
-			if ((*head)->right == NULL) {
-				start = (*head)->left;
-				(*head) = (*head)->left;
-				(*head)->right = NULL;
-				delete temp;
-			}
-			else if ((*head)->left == NULL) {
-				(*tail) = (*tail)->right;
-				(*tail)->left = NULL;
-				(*head) = (*tail);
-				delete temp;
-			} 
-            else {
-				(*head)->left->right = (*head)->right;
-				(*head)->right->left = (*head)->left;
-				(*head) = (*head)->left;
-				delete temp;
-			}
-		}
-		(*head) = (*head)->left;
-	}
-	(*head) = start;
+void fromListToCompactList(list* head, cListNode** cHead, cListNode** cTail) {
+    list* current = head;
+    int index = 0;
+
+    while (current) {
+        if (current->num != 0) {
+            cListNode* newNode = new cListNode();
+            newNode->index = index;
+            newNode->num = current->num;
+            newNode->left = NULL;
+            newNode->right = NULL;
+
+            if (!*cHead) {
+                *cHead = newNode;
+                *cTail = newNode;
+            } else {
+                (*cTail)->right = newNode;
+                newNode->left = *cTail;
+                *cTail = newNode;
+            }
+        }
+        current = current->right;
+        index++;
+    }
 }
