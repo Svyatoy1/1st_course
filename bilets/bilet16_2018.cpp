@@ -13,6 +13,10 @@ using namespace std;
 /* Написати функцію для визначення кількості входження елементів із значеннями з інтервалу 
 [u,v] до невпорядкованого бінарного дерева, що зберігається у стандартній формі */
 
+//task4
+/* Написати функцію для вставки вузла зі значенням v у дерево бінарного пошуку, 
+якщо таке значення у ньому відсутнє */
+
 //task1
 // Функція для знаходження мінімального значення в списку
 int findMin(Node* head) {
@@ -97,4 +101,43 @@ int countInRange(Node* root, int u, int v) {
         count = 1;
     
     return count + countInRange(root->left, u, v) + countInRange(root->right, u, v);
+}
+
+//task4
+// Функція для створення нового вузла
+node* createNode(int number) {
+    node* newnode = new node;
+    newnode->num = number;
+    newnode->left = newnode->right = NULL;
+    return newnode;
+}
+
+// Функція для перевірки, чи містить дерево значення v
+bool containsNode(node* root, int v) {
+    if (!root) return false;
+    if (root->num == v) return true;
+    if (v < root->num) 
+        return containsNode(root->left, v);
+    return containsNode(root->right, v);
+}
+
+// Функція для вставки вузла зі значенням v, якщо його немає в дереві
+void addNode(node*& root, int number) {
+    if (!containsNode(root, number)) {
+        if (!root) {
+            root = createNode(number);
+        } else if (number < root->num) {
+            if (root->left) {
+                addNode(root->left, number);
+            } else {
+                root->left = createNode(number);
+            }
+        } else {
+            if (root->right) {
+                addNode(root->right, number);
+            } else {
+                root->right = createNode(number);
+            }
+        }
+    }
 }
