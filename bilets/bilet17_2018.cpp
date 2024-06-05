@@ -92,3 +92,17 @@ int findMaxLessThanV(node* root, int v) {
     }
     return maxVal;
 }
+
+//task5
+int countEdges(grph* Graph) {
+    int count = 0;
+    for (int i = 0; i < 8; i++) {
+        Node* temp = Graph->adjLists[i];
+        while (temp) {
+            count++;
+            temp = temp->next;
+        }
+    }
+    // Оскільки граф неорієнтований, кожне ребро враховане двічі
+    return count / 2;
+}
