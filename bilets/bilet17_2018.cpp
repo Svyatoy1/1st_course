@@ -5,6 +5,11 @@ using namespace std;
 /* В елементах списку, що представляється у двозв'язному представленні, розміщені цілі числа. 
 Написати функцію копіювання списку, помінявши порядок елементів на обернений */
 
+//task2
+/* До лінійного списку F з m цілих чисел, більшість елементів якого дорівнюють 0, 
+застосоване стисле зв'язне зберігання. Написати функцію для визначення кількості 
+невід'ємних елементів списку F, номери яких належать інтервалу [i,j] */
+
 //task1
 Node* createNode(int num) {
     Node* newNode = new Node();
@@ -30,4 +35,16 @@ Node* copyReversed(Node* head) {
         temp = temp->next;
     }
     return newHead;
+}
+
+//task2
+int countNonNegative(Node* head, int i, int j) {
+    int count = 0;
+    Node* temp = head;
+    while (temp) {
+        if (temp->index >= i && temp->index <= j && temp->value >= 0)
+            count++;
+        temp = temp->next;
+    }
+    return count;
 }
