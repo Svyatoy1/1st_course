@@ -144,3 +144,21 @@ void addNode(node*& root, int number) {
         }
     }
 }
+
+//task5
+int countHangingVertices(grph& Graph, int graphArraySize) {
+    int count = 0;
+    for (int i = 0; i < graphArraySize; i++) {
+        node* current = Graph.arr[i];
+        int degree = 0;
+
+        while (current) {
+            degree++;
+            current = current->next;
+        }
+
+        if (degree == 1) 
+            count++;
+    }
+    return count;
+}
