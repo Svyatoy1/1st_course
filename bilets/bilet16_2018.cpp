@@ -8,7 +8,8 @@ using namespace std;
 //task1
 // Функція для знаходження мінімального значення в списку
 int findMin(Node* head) {
-    if (!head) return -1;
+    if (!head) 
+        return;
     int minVal = head->data;
     Node* current = head->next;
     while (current) {
@@ -43,11 +44,10 @@ void deleteMinElements(Node** head) {
     int minVal = findMin(*head);
     Node* current = *head;
 
-    while (current != NULL) {
+    while (current) {
         Node* next = current->next;
-        if (current->data == minVal) {
+        if (current->data == minVal)
             deleteNode(head, current);
-        }
         current = next;
     }
 }
