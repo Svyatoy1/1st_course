@@ -10,6 +10,13 @@ using namespace std;
 що числа, які мають однакову останню цифру, розміщуються в один підсписок. Написати 
 функцію, яка додає до списку елемент зі значенням v, якщо такий елемент у списку відсутній */
 
+//task3
+/* Написати функцію для визначення кількості листів з відмітками, що належить інтервалу [u,v], 
+у невпорядкованому бінарному дереві, що зберігається у стандартній формі */
+
+//task4
+/* Написати функцію для визначення кількості входжень додатних значень до дерева бінарного пошуку */
+
 //task1
 void moveNonPositiveToEnd(list** head, list** tail) {
     list* current = *head;
@@ -111,3 +118,34 @@ void addIfAbsent(IndexNode*& head, int v) {
         }
     }
 }
+
+//task3
+int countLeavesInInterval(Node* root, int u, int v) {
+    if (!root) 
+        return 0;
+
+    if (!root->left && !root->right) {
+        if (root->data >= u && root->data <= v)
+            return 1;
+        else 
+            return 0;
+    }
+    
+    // Рекурсивно перевіряємо ліву і праву піддерева
+    return countLeavesInInterval(root->left, u, v) + countLeavesInInterval(root->right, u, v);
+}
+
+//task4
+int countPositiveValues(Node* root) {
+    if (!root) 
+        return 0;
+	
+    int count = 0;
+	
+    if (root->data > 0)
+        count = 1;
+	
+    return count + countPositiveValues(root->left) + countPositiveValues(root->right);
+}
+
+//task5
