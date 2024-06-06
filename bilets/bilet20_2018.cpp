@@ -43,9 +43,30 @@ void reorderList(Node** head) {
         current = next;
     } while (current != *head);
 
-    if (negTail) negTail->next = zeroHead ? zeroHead : posHead;
-    if (zeroTail) zeroTail->next = posHead;
-    if (posTail) posTail->next = negHead ? negHead : (zeroHead ? zeroHead : posHead);
+    // Connect the three lists
+    if (negTail) {
+        negTail->next = zeroHead ? zeroHead : posHead;
+    }
+    if (zeroTail) {
+        zeroTail->next = posHead;
+    }
+    if (posTail) {
+        posTail->next = negHead ? negHead : zeroHead;
+    }
 
-    *head = negHead ? negHead : (zeroHead ? zeroHead : posHead);
+    // Set new head
+    if (negHead) {
+        *head = negHead;
+    } else if (zeroHead) {
+        *head = zeroHead;
+    } else {
+        *head = posHead;
+    }
+
+    // Make the list circular again
+    Node* temp = *head;
+    while (temp->next && temp->next != *head) {
+        temp = temp->next;
+    }
+    temp->next = *head;
 }
