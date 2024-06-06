@@ -47,3 +47,67 @@ void moveNonPositiveToEnd(list** head, list** tail) {
     }
 }
 
+//task2
+struct Node {
+    int num;
+    Node* next;
+};
+
+// Вузол для індексного списку
+struct IndexNode {
+    int lastDigit;  // остання цифра чисел у підсписку
+    Node* sublist;  // вказівник на підсписок
+    IndexNode* next;
+};
+
+Node* createNode(int num) {
+    Node* newNode = new Node();
+    newNode->num = num;
+    newNode->next = NULL;
+    return newNode;
+}
+
+IndexNode* createIndexNode(int lastDigit) {
+    IndexNode* newIndexNode = new IndexNode();
+    newIndexNode->lastDigit = lastDigit;
+    newIndexNode->sublist = NULL;
+    newIndexNode->next = NULL;
+    return newIndexNode;
+}
+
+void addIfAbsent(IndexNode*& head, int v) {
+    int lastDigit = v % 10;  // Визначаємо останню цифру числа
+    IndexNode* current = head;
+    IndexNode* prev = NULL;
+
+    // Шукаємо індексний вузол з потрібною останньою цифрою
+    while (current && current->lastDigit != lastDigit) {
+        prev = current;
+        current = current->next;
+    }
+
+    if (current) {
+        // Індексний вузол знайдено, перевіряємо підсписок
+        Node* sublist = current->sublist;
+        while (sublist) {
+            if (sublist->num == v) {
+                // Число вже є у підсписку, нічого не додаємо
+                return;
+            }
+            sublist = sublist->next;
+        }
+        // Числа немає, додаємо його до підсписку
+        Node* newNode = createNode(v);
+        newNode->next = current->sublist;
+        current->sublist = newNode;
+    } else {
+        // Індексного вузла немає, створюємо новий
+        IndexNode* newIndexNode = createIndexNode(lastDigit);
+        newIndexNode->sublist = createNode(v);
+        if (prev)
+		prev->next = newIndexNode;
+        else
+        	head = newIndexNode;
+        }
+    }
+}
