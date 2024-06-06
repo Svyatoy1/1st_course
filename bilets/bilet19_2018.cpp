@@ -41,3 +41,4 @@ void moveNonPositiveToEnd(list** head, list** tail) {
         current = current->right;
     }
 }
+
