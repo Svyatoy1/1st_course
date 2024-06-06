@@ -17,20 +17,20 @@ void moveNonPositiveToEnd(list** head, list** tail) {
             } else {
                 if (lastPositive->right != current) {
                     if (current->left) 
-						            current->left->right = current->right;
+			current->left->right = current->right;
                     if (current->right) 
-						            current->right->left = current->left;
+			current->right->left = current->left;
                   
                     current->left = lastPositive;
                     current->right = lastPositive->right;
                   
                     if (lastPositive->right) 
-						            lastPositive->right->left = current;
+			lastPositive->right->left = current;
                   
                     lastPositive->right = current;
                   
                     if (lastPositive == *tail) 
-						            *tail = current;
+			*tail = current;
                   
                     lastPositive = current;
                 } else {
