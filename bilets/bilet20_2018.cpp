@@ -10,6 +10,9 @@ using namespace std;
 що числа, які мають дві однакові останні цифри, розміщуються в один підсписок. Написати 
 функцію, яка вилучає з списку елемент зі значенням v, якщо він присутній */
 
+//task3
+/* Написати функцію для визначення висоти невпорядкованого бінарного дерева, що зберігається у стандартній формі */
+
 void moveList(list** head, list** tail) {
     list* current = *head;
     list* lastNegative = NULL;
@@ -102,4 +105,18 @@ void deleteElement(IndexNode** head, int v) {
             delete indexNode;
         }
     }
+}
+
+//task3
+int height(Node* root) {
+    if (root == NULL) 
+        return 0;
+
+    int leftHeight = height(root->left);
+    int rightHeight = height(root->right);
+
+    if (leftHeight > rightHeight)
+        return leftHeight + 1;
+    else 
+        return rightHeight + 1;
 }
