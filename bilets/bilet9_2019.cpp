@@ -9,6 +9,10 @@ using namespace std;
 /* Написати функцію для побудови послідовно-зв'язного індексного зберігання розрідженої матриці 
 В[10,40] за звичайним представленням двовимірним масивом */
 
+//task3
+/* Написати функцію, що визначає кількість вузлів на шляху від кореня дерева степені 1, що зберігається 
+у стандартній формі, до вузла з заданим значенням v. Якщо таких вузлів декілька, обрати будь-який з них */
+
 //task1
 ListNode* mergeSortedLists(ListNode* list1, ListNode* list2) {
     if (!list1) return l2;
@@ -77,7 +81,7 @@ void AddElement(ListNode** head, ListNode** tail, int value, int rowIndex, int c
     }
 }
 
-ListNode* CreateRowList(ListNode** head, ListNode** tail, const int rowIndex, const int arr[], const int length) {
+ListNode* CreateRowList(ListNode** head, ListNode** tail, int rowIndex, int arr[], int length) {
     for (int i = 0; i < length; i++) {
         if (arr[i] != 0)
             AddElement(head, tail, arr[i], rowIndex, i);
@@ -101,4 +105,28 @@ void CreateSparseMatrix(MatNode** headMat, MatNode** tailMat, int numRows, int n
             *tailMat = newMatNode;
         }
     }
+}
+
+//task3
+
+bool findPath(TreeNode* root, int v, int& count) {
+    if (root == NULL)
+        return false;
+    if (root->value == v)
+        return true;
+    count++;
+    if (root->left && findPath(root->left, v, count))
+        return true;
+    if (root->right && findPath(root->right, v, count))
+        return true;
+    count--;
+    return false;
+}
+
+int countNodesOnPath(TreeNode* root, int v) {
+    int count = 0;
+    if (findPath(root, v, count))
+        return count;
+    else 
+        return -1; // Вузол з заданим значенням не знайдено
 }
