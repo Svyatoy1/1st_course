@@ -148,12 +148,12 @@ int countInRange(Node* root, int v, int u) {
 //task5
 bool isEulerian(grph graph){
    for (int i = 0; i<10; i++) { // assuming graph has 10 vertices
-      int step = 0;
+      int step = 0;   
       node* temp = graph.arr[i];
       while (temp) {
          step++;
-         temp = temp->next
-      }
+         temp = temp->next;
+      } 
       if (step%2 != 0)
          return false;
       }
