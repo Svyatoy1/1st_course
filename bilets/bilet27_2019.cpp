@@ -10,6 +10,10 @@ using namespace std;
 /* Написати функцію для реалізації поелементного додавання двох розріджених матриць,
 при послідовно-зв'язному індексному зберіганні */
 
+//task3
+/* Написати функцію для вилучення вузла зі значенням v дерева бінарного пошуку, 
+якщо таке значення у ньому присутнє */
+
 //task1
 struct Node {
     int coefficient; 
@@ -96,4 +100,63 @@ void addMatrices(MatrixRow* matA, MatrixRow* matB, MatrixRow** resultHead, Matri
         if (matA) matA = matA->next;
         if (matB) matB = matB->next;
     }
+}
+
+//task3
+void DeleteV(node** root, int number, node** prev) {
+	if(!(*root))
+		return;
+
+	if ((*root)->num == number) {
+		node* temp = (*root);
+		if ((*root)->left == NULL && (*root)->right == NULL) {
+			if (*prev) {
+				if ((*prev)->left == (*root))
+					(*prev)->left == NULL;
+				else
+					(*prev)->right = NULL;
+			}
+			delete temp;
+		}
+		else if ((*root)->left && (*root)->right) {
+			node* iter = (*root)->right;
+			node* previter = NULL;
+			while (iter->left) {
+				previter = iter;
+				iter = iter->left;
+			}
+			(*root)->num = iter->num;
+			if ((*prev) == NULL)
+				(*root)->right = (*root)->right->right;
+			if(previter)
+				previter->left = NULL;
+			if ((*root)->right == iter)
+				if ((*root)->right->right)
+					(*root)->right = (*root)->right->right;
+				else
+					(*root)->right = NULL;
+			delete iter;
+		}
+		else {
+			if ((*prev)->left == (*root)) {
+				if ((*root)->left)
+					(*prev)->left = (*root)->left;
+				else
+					(*prev)->left = (*root)->right;
+			}
+			else {
+				if ((*root)->left)
+					(*prev)->right = (*root)->left;
+				else
+					(*prev)->right = (*root)->right;
+			}
+			delete temp;
+		}
+		return;
+	}
+	(*prev) = (*root);
+	if ((*root)->num > number )
+		DeleteV(&((*root)->left), number, prev);
+	else 
+		DeleteV(&((*root)->right), number, prev);
 }
