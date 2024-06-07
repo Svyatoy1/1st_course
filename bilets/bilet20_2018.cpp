@@ -13,6 +13,9 @@ using namespace std;
 //task3
 /* Написати функцію для визначення висоти невпорядкованого бінарного дерева, що зберігається у стандартній формі */
 
+//task4
+/* Написати функцію для визначення кількості входжень значень з інтервалу [v, u] до дерева бінарного пошуку */
+
 void moveList(list** head, list** tail) {
     list* current = *head;
     list* lastNegative = NULL;
@@ -119,4 +122,22 @@ int height(Node* root) {
         return leftHeight + 1;
     else 
         return rightHeight + 1;
+}
+
+//task4
+int countInRange(Node* root, int v, int u) {
+    if (root == NULL)
+        return 0;
+
+    int count = 0;
+    if (root->num >= v && root->num <= u)
+        count++;
+
+    if (root->num > v)
+        count += countInRange(root->left, v, u);
+
+    if (root->num < u)
+        count += countInRange(root->right, v, u);
+
+    return count;
 }
