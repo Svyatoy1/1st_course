@@ -45,3 +45,61 @@ void moveList(list** head, list** tail) {
         current = current->right;
     }
 }
+
+//task2
+struct Node {
+    int num;
+    Node* next;
+};
+
+struct IndexNode {
+    int key;  // Останні дві цифри числа
+    Node* sublist;
+    IndexNode* next;
+};
+
+IndexNode* findIndexNode(IndexNode* head, int key) {
+    while (head && head->key != key)
+        head = head->next;
+    return head;
+}
+
+void deleteFromSublist(Node** sublist, int v) {
+    Node* current = *sublist;
+    Node* prev = NULL;
+
+    while (current) {
+        if (current->num == v) {
+            if (prev)
+                prev->next = current->next;
+            else
+                *sublist = current->next;
+            delete current;
+            return;
+        }
+        prev = current;
+        current = current->next;
+    }
+}
+
+void deleteElement(IndexNode** head, int v) {
+    int key = v % 100;  // Визначення останніх двох цифр числа
+    IndexNode* indexNode = findIndexNode(*head, key);
+
+    if (indexNode) {
+        deleteFromSublist(&(indexNode->sublist), v);
+
+        // Якщо підсписок порожній, видаляємо індексний вузол
+        if (indexNode->sublist == NULL) {
+            if (*head == indexNode) 
+                *head = indexNode->next;
+            else {
+                IndexNode* temp = *head;
+                while (temp->next != indexNode)
+                    temp = temp->next;s
+                temp->next = indexNode->next;
+            }
+            delete indexNode;
+        }
+    }
+}
