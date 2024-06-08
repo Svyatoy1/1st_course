@@ -9,6 +9,9 @@ using namespace std;
 //task2
 /* Написати кількість, яка визначає кількість внутрішніх вершин бінарного дерева, що представлено у стандартній формі */
 
+//task3
+/* Написати функцію, яка перевіряє ациклічність орієнтованого графа, 
+поданого матрицею суміжності */
 
 //task1
 //infrastructure to understand
@@ -88,7 +91,7 @@ void numberOfInternalNodes(node* root, int* number) {
     numberOfInternalNodes(root->right, number);
 }
 
-//task5
+//task3
 void DFS(int graph[N][N], int vertex, bool visited[N], int parent, bool& cyclic) {
     visited[vertex] = true;
     for (int i = 0; i < N; i++) {
