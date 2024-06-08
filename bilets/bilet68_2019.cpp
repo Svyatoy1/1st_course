@@ -75,3 +75,15 @@ int sumFromPolynoms(polynom* head, polynom* tail, int X, int Y, int Z) {
 	}
 	return sum;
 }
+
+//task2
+void numberOfInternalNodes(node* root, int* number) {
+    if (!root) 
+        return;
+	
+    if (root->left || root->right) 
+        (*number)++;
+	
+    numberOfInternalNodes(root->left, number);
+    numberOfInternalNodes(root->right, number);
+}
