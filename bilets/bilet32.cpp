@@ -57,3 +57,103 @@ void sumPol(list** head, list** tail, list* head1, list* tail1, list* head2, lis
 		}
 	}
 }
+
+//task2
+// Вузол бінарного дерева
+struct TreeNode {
+    int value;
+    TreeNode* left;
+    TreeNode* right;
+};
+
+// Вузол черги
+struct QueueNode {
+    TreeNode* treeNode;
+    QueueNode* next;
+};
+
+// Черга для рівневого обходу
+struct Queue {
+    QueueNode* front;
+    QueueNode* rear;
+};
+
+// Ініціалізація черги
+void initQueue(Queue* q) {
+    q->front = NULL;
+    q->rear = NULL;
+}
+
+// Додавання вузла до черги
+void enqueue(Queue* q, TreeNode* node) {
+    QueueNode* newNode = new QueueNode;
+    newNode->treeNode = node;
+    newNode->next = NULL;
+    if (q->rear == NULL) {
+        q->front = q->rear = newNode;
+    } else {
+        q->rear->next = newNode;
+        q->rear = newNode;
+    }
+}
+
+// Видалення вузла з черги
+TreeNode* dequeue(Queue* q) {
+    if (q->front == NULL)
+        return NULL;
+    TreeNode* treeNode = q->front->treeNode;
+    QueueNode* temp = q->front;
+    q->front = q->front->next;
+    if (q->front == NULL) {
+        q->rear = NULL;
+    }
+    delete temp;
+    return treeNode;
+}
+
+// Перевірка на порожність черги
+bool isEmpty(Queue* q) {
+    return q->front == NULL;
+}
+
+// Функція для рівневого обходу дерева та друкування значень вузлів
+void printLevelOrder(TreeNode* root) {
+    if (root == NULL) 
+        return;
+    Queue q;
+    initQueue(&q);
+    enqueue(&q, root);
+
+    while (!isEmpty(&q)) {
+        TreeNode* current = dequeue(&q);
+        cout << current->value << " ";
+	    
+        if (current->left)
+            enqueue(&q, current->left);
+        if (current->right)
+            enqueue(&q, current->right);
+    }
+    cout << endl;
+}
+
+//task3
+void deletePseudograph(grph* graph, int N) {
+    for (int i = 0; i < N; i++) {
+        node* temp = graph->arr[i];
+        node* prev = NULL;
+        while (temp) {
+            if (temp->num == i + 1) {
+                node* comp = temp;
+                if (prev)
+                    prev->next = temp->next;
+                else {
+                    temp = temp->next;
+                    graph->arr[i] = temp;
+                }
+                delete comp;
+            }
+            prev = temp;
+            temp = temp->next;
+        }
+    }
+}
