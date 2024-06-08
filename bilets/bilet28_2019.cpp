@@ -91,3 +91,59 @@ int maxRowWithZeros(MatNode* head) {
     }
     return maxRow;
 }
+
+//task3
+// Вузол дерева
+struct TreeNode {
+    int value;
+    TreeNode* left;
+    TreeNode* right;
+};
+
+// Вузол стека
+struct StackNode {
+    TreeNode* treeNode;
+    StackNode* next;
+};
+
+// Додавання вузла в стек
+void pushStack(StackNode** head, StackNode** tail, TreeNode* treeNode) {
+    StackNode* newNode = new StackNode;
+    newNode->treeNode = treeNode;
+    newNode->next = NULL;
+    if (*head == NULL) {
+        *head = newNode;
+        *tail = newNode;
+    } else {
+        (*tail)->next = newNode;
+        *tail = newNode;
+    }
+}
+
+// Видалення вузла зі стека
+void popStack(StackNode** head, StackNode** tail) {
+    if (*head == NULL) 
+	    return;
+    StackNode* temp = *head;
+    *head = (*head)->next;
+    if (*head == NULL) *tail = NULL;
+    delete temp;
+}
+
+// Нерекурсивний обхід дерева та запис у масив
+void treeToSortedArray(TreeNode* root, int arr[], int& index) {
+    StackNode* head = NULL;
+    StackNode* tail = NULL;
+    TreeNode* current = root;
+
+    while (current || head) {
+        while (current) {
+            pushStack(&head, &tail, current);
+            current = current->left;
+        }
+        current = head->treeNode;
+        arr[index++] = current->value;
+        popStack(&head, &tail);
+        current = current->right;
+    }
+}
