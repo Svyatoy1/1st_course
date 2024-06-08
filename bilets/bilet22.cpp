@@ -4,8 +4,13 @@ using namespace std;
 /* Написати функцію для копіювання списку у «однозвʼязному представленні», зберігаючи 
 взаємний порядок елементів, але зробивши у копії «двозвʼязне циклічне представлення» */
 
+//task 2
 /* Написати функцію для визначення висоти «дерева степені 3», що зберігається у 
 «розширеній стандартній формі». */
+
+//task3
+/* Знайти всі вершини графа, що поданий «структурую суміжності», до яких існує шлях 
+заданої довжини d від заданої вершини */
 
 //task1
 struct stack {
@@ -62,4 +67,45 @@ int heightOfTree(TreeNode* node) {
     int height3 = heightOfTree(node->child3);
 
     return 1 + max({height1, height2, height3});
+}
+
+//task3
+struct GraphNode {
+    int index;
+    GraphNode* next;
+};
+
+void findVertices(int current, int currentDistance, int distance, bool* result, bool* visited, GraphNode* GraphArr[], int rows) {
+    if (currentDistance == distance) {
+        result[current] = true;
+        return;
+    }
+    visited[current] = true;
+    GraphNode* neighbor = GraphArr[current];
+    while (neighbor) {
+        if (!visited[neighbor->index]) {
+            findVertices(neighbor->index, currentDistance + 1, distance, result, visited, GraphArr, rows);
+        }
+        neighbor = neighbor->next;
+    }
+    visited[current] = false;
+}
+
+void task3(int startVertex, int distance, bool* result, GraphNode* GraphArr[], int rows) {
+    if (distance < 0 || startVertex < 0 || startVertex >= rows)
+        return;
+
+    bool visited[rows] = {false};
+    for (int i = 0; i < rows; ++i) {
+        result[i] = false;
+    }
+
+    findVertices(startVertex, 0, distance, result, visited, GraphArr, rows);
+
+    cout << "Vertices at distance " << distance << " from vertex " << startVertex + 1 << " are: ";
+    for (int i = 0; i < rows; i++) {
+        if (result[i]) 
+            cout << i + 1 << " ";
+    }
+    cout << '\n';
 }
