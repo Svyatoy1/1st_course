@@ -17,13 +17,12 @@ using namespace std;
 void moveMaxToEnd(ListNode*& head) {
     if (!head || !head->next) 
         return;
-
+    
     stackNode* current = head;
     stackNode* maxNode = head;
     stackNode* prevMax = NULL;
     stackNode* prev = NULL;
 
-    // Знайти найбільший елемент і його попередник
     while (current) {
         if (current->value > maxNode->value) {
             maxNode = current;
@@ -35,7 +34,6 @@ void moveMaxToEnd(ListNode*& head) {
 
     if (maxNode->next == NULL)
         return;
-
     if (prevMax)
         prevMax->next = maxNode->next;
     else 
@@ -47,4 +45,49 @@ void moveMaxToEnd(ListNode*& head) {
   
     current->next = maxNode;
     maxNode->next = NULL;
+}
+
+//task2
+int maxRowWithZeros(mat* headM) {
+	int line = 1;
+	int maxnum = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		int numberzero = 0;
+		listI* temp = headM->list;
+		while (temp)
+		{
+			numberzero++;
+			temp = temp->left;
+		}
+		if (maxnum < 5 - numberzero)
+		{
+			maxnum = 5 - numberzero;
+			line = i+1;
+		}
+		headM = headM->next;
+	}
+	return line;
+}
+
+int maxRowWithZeros(MatNode* head) {
+    int maxZeros = -1;
+    int maxRow = -1;
+    int currentRow = 0;
+    
+    while (head) {
+        int zeroCount = 50; // Початково вважати всі елементи нульовими
+        ListNode* temp = head->row;
+        while (temp) {
+            zeroCount--;
+            temp = temp->next;
+        }
+        if (zeroCount > maxZeros) {
+            maxZeros = zeroCount;
+            maxRow = currentRow;
+        }
+        head = head->next;
+        currentRow++;
+    }
+    return maxRow;
 }
