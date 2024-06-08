@@ -61,3 +61,21 @@ void MatrixQuadro(node* arrR[], node* arrST[], int matrix[10][10]) {
         }
     }
 }
+
+//task3
+struct node {
+    int num;
+    node* left;
+    node* right;
+};
+
+void countMoreThan(node* root, int V, int* count) {
+    if (!root)  
+        return;
+	
+    if (root->num > V) 
+        (*count)++;
+    
+    countLessThan(root->left, V, count);
+    countLessThan(root->right, V, count);
+}
