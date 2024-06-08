@@ -87,3 +87,30 @@ void numberOfInternalNodes(node* root, int* number) {
     numberOfInternalNodes(root->left, number);
     numberOfInternalNodes(root->right, number);
 }
+
+//task5
+void DFS(int graph[N][N], int vertex, bool visited[N], int parent, bool& cyclic) {
+    visited[vertex] = true;
+    for (int i = 0; i < N; i++) {
+        if (graph[vertex][i] == 1 && !visited[i]) {
+            DFS(graph, i, visited, vertex, cyclic);
+        } else if (graph[vertex][i] == 1 && i != parent) {
+            cyclic = true; // Знайдено цикл
+        }
+    }
+}
+
+bool isCyclic(int graph[N][N]) {
+    bool visited[N] = {false};
+    bool cyclic = false;
+
+    // Починаємо DFS з кожної вершини графа
+    for (int i = 0; i < N; i++) {
+        if (!visited[i]) {
+            DFS(graph, i, visited, -1, cyclic);
+            if (cyclic)
+                return true;
+        }
+    }
+    return false;
+}
