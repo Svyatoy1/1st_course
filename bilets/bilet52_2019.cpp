@@ -96,7 +96,7 @@ void printReverse(TreeNode* root) {
 }
 
 //task3
-void DFS(grph graph, int vertex, bool visited[10]) { //assuming graph contains 10 nodes
+void DFS(grph graph, int vertex, bool visited[10]) { //assuming graph has 10 vertices
     visited[vertex - 1] = true;
     Node* temp = graph.arr[vertex - 1];
     while (temp) {
