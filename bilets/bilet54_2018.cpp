@@ -66,15 +66,15 @@ struct node {
     node* right;
 };
 
-void countMoreThan(node* root, int number, int* count) {
+void countMoreThan(node* root, int A, int* count) {
     if (!root)  
         return;
 	
-    if (root->num > number) 
+    if (root->num > A) 
         (*count)++;
     
-    countLessThan(root->left, number, count);
-    countLessThan(root->right, number, count);
+    countLessThan(root->left, A, count);
+    countLessThan(root->right, A, count);
 }
 
 //task4
