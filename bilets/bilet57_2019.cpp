@@ -10,6 +10,10 @@ using namespace std;
 записаного у звичайній інфіксній формі у представленні форми ПОЛІЗ. 
 Потрібний стек реалізуват власноруч */
 
+//task3
+/* Написати функцію, яка визначає кількість ребер у доповненні неорієнтованого графа, 
+поданого структурою суміжності */
+
 //task1
 struct listI {
 	int num;
@@ -92,4 +96,29 @@ void initPoliz(char in[100], char out[100]) {
 		out[j] = getElement(&head);
 		j++;
 	}
+}
+
+struct Node {
+    int num;
+    Node* next;
+};
+
+struct Graph {
+    Node* adjacencyList[10];
+};
+
+//task3
+int countEdgesInComplement(grph graph, int N) {
+    int edgeCount = 0;
+    for (int i = 0; i < N; i++) {
+        Node* temp = graph.adjacencyList[i];
+        while (temp) {
+            edgeCount++;
+            temp = temp->next;
+        }
+    }
+    
+    edgeCount /= 2;
+    int totalEdges = (N * (N - 1)) / 2;
+    return totalEdges - edgeCount;
 }
