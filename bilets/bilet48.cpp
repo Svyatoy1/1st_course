@@ -120,3 +120,5 @@ void initPoliz(char in[100], char out[100]) {
 		j++;
 	}
 }
+
+//task3
