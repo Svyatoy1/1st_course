@@ -79,6 +79,9 @@ void countMoreThan(node* root, int A, int* count) {
 
 //task4
 int findMinInTree(node* root) {
+	if (!root)  
+       		return;
+	
 	if (root->left == NULL)
 		return root->num;
 	return findMinInTree(root->left);
