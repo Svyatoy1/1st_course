@@ -22,10 +22,10 @@ struct listNode {
 };
 
 struct CompactNode{
-	int index;
-	int num;
-	CompactNode *left;
-	CompactNode *right;
+    int index;
+    int num;
+    CompactNode* left;
+    CompactNode* right;
 };
 
 void cListAdd(int value, int index, CompactNode** head, CompactNode** tail) {
@@ -63,18 +63,13 @@ void cListNew(CompactNode** cHead, CompactNode** cTail, listNode* head) {
 int findZerosFromTo(CompactNode* head, int i, int j){
     int nodesWithNonZeroValue = 0;
     CompactNode* current = head;
+
     while (current) {
-        if(current->index >= i && current->index < j){
+        if(current->index >= i && current->index <= j)
             nodesWithNonZeroValue++;
-            current = current->left;
-        }else if(current->index == j){
-            nodesWithNonZeroValue++;
-            break;
-        } else {
-            break;
-        }
+        current = current->left;
     }
-    return j-i-nodesWithNonZeroValue+1;
+    return (j - i + 1) - nodesWithNonZeroValue;
 }
 
 //task2
