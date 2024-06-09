@@ -95,3 +95,26 @@ void reversePostOrder(Node* root) {
     }
     cout << endl;
 }
+
+//task3
+void DFS(grph graph, int vertex, bool visited[10]) { //assuming graph has 10 vertices
+    visited[vertex - 1] = true;
+    Node* temp = graph.arr[vertex - 1];
+    while (temp) {
+        if (!visited[temp->num - 1])
+            DFS(graph, temp->num, visited);
+        temp = temp->next;
+    }
+}
+
+// Функція для виведення досяжних вершин з даної вершини
+void reachableVertices(grph graph, int startVertex, bool visited[10]) {
+    DFS(graph, startVertex, visited);
+    cout << "The vertices reachable from vertex " << startVertex << " are: ";
+    for (int i = 0; i < 10; i++) {
+        if (visited[i]) {
+            cout << i + 1 << ", ";
+        }
+    }
+    cout << endl;
+}
