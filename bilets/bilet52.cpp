@@ -38,3 +38,60 @@ void sortCycleList(list** head, list** tail) {
   
 	(*head) = start;
 }
+
+//task 2
+struct Node {
+    int value;
+    Node* left;
+    Node* right;
+};
+
+struct NodeStack {
+    Node* node;
+    NodeStack* next;
+};
+
+void addNodeInStack(NodeStack** stack, Node* node) {
+    NodeStack* newStackNode = new NodeStack;
+    newStackNode->node = node;
+    newStackNode->next = *stack;
+    *stack = newStackNode;
+}
+
+Node* pop(NodeStack** stack) {
+    if (*stack == NULL) {
+        return NULL;
+    }
+    NodeStack* topNode = *stack;
+    Node* treeNode = topNode->node;
+    *stack = topNode->next;
+    delete topNode;
+    return treeNode;
+}
+
+void reversePostOrder(Node* root) {
+    if (root == NULL) 
+        return;
+        
+    NodeStack* stack1 = NULL;
+    NodeStack* stack2 = NULL;
+
+    addNodeInStack(&stack1, root);
+
+ // обхід дерева в оберненому порядку
+    while (stack1) {
+        Node* node = pop(&stack1);
+        addNodeInStack(&stack2, node);
+        if (node->left) 
+            addNodeInStack(&stack1, node->left);
+        if (node->right) 
+            addNodeInStack(&stack1, node->right);
+	}
+	
+	// вивід порядку вузлів
+    while (stack2) {
+        Node* node = pop(&stack2);
+        cout << node->value << " ";
+    }
+    cout << endl;
+}
