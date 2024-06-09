@@ -13,3 +13,27 @@ using namespace std;
 // task 3
 /* Написати функцію, яка перевіряє суміжність двох заданих вершин у неорієнтованому
 графі, що поданий структурою суміжності. */
+
+//task1
+void selectionSort(DoublyLinkedList& list) {
+    // Отримуємо головний вузол списку
+    Node* head = list.getHead();
+    if (head == NULL) 
+        return;
+    Node* start = head;
+    while (start) {
+        Node* minNode = start;
+        Node* current = start->next;
+        while (current) {
+            if (current->data < minNode->data)
+                minNode = current;
+            current = current->next;
+        }
+        if (minNode != start) {
+            int temp = start->data;
+            start->data = minNode->data;
+            minNode->data = temp;
+        }
+        start = start->next;
+    }
+}
