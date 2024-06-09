@@ -75,3 +75,17 @@ void task2(node* root){
 		qDel(&head, &tail);	
 	}
 }
+
+void SVOG(graf grap, int ver1,int ver2)
+{
+    node* temp = grap.arr[ver1 - 1];
+    while (temp) {
+        if (temp->num == ver2)
+        {
+            cout << "ver1 and ver2 sumishni" << endl;
+            return;
+        }
+        temp = temp->next;
+    }
+    cout << "ver1 and ver2 not a sumishni" << endl;
+}
