@@ -98,6 +98,7 @@ void initPoliz(char in[100], char out[100]) {
 	}
 }
 
+//task3
 struct Node {
     int num;
     Node* next;
@@ -107,7 +108,6 @@ struct Graph {
     Node* adjacencyList[10];
 };
 
-//task3
 int countEdgesInComplement(grph graph, int N) {
     int edgeCount = 0;
     for (int i = 0; i < N; i++) {
