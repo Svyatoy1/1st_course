@@ -4,7 +4,7 @@ using namespace std;
 //task1
 /* В елементах циклічного списку розміщені цілі числа. Написати функцію, 
 що розбиває множину поданих чисел на дві: з парними та непарними значеннями, 
-використовуючи дял множин представлення циклічними списками*/
+використовуючи для множин представлення циклічними списками*/
 
 //task2
 /* Лінійний список F цілих чисел зберігається як послідовно-зв'язний індексний список так, 
@@ -131,9 +131,9 @@ void addNodeInStack(NodeStack** stack, Node* node) {
 }
 
 Node* pop(NodeStack** stack) {
-    if (*stack == NULL) {
-        return NULL;
-    }
+    if (*stack == NULL)
+        return;
+
     NodeStack* topNode = *stack;
     Node* treeNode = topNode->node;
     *stack = topNode->next;
@@ -188,7 +188,7 @@ int sumGreaterThan(Node* root, int v) {
 int countDegreeThreeVertices(grph graph) {
     int count = 0;
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) { //assuning graph has 8 vertices
         int degree = 0;
         node* temp = graph.arr[i];
         while (temp) {
