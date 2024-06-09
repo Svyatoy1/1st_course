@@ -48,28 +48,6 @@ void moveMaxToEnd(ListNode*& head) {
 }
 
 //task2
-int maxRowWithZeros(mat* headM) {
-	int line = 1;
-	int maxnum = 0;
-	for (int i = 0; i < 5; i++)
-	{
-		int numberzero = 0;
-		listI* temp = headM->list;
-		while (temp)
-		{
-			numberzero++;
-			temp = temp->left;
-		}
-		if (maxnum < 5 - numberzero)
-		{
-			maxnum = 5 - numberzero;
-			line = i+1;
-		}
-		headM = headM->next;
-	}
-	return line;
-}
-
 int maxRowWithZeros(MatNode* head) {
     int maxZeros = -1;
     int maxRow = -1;
