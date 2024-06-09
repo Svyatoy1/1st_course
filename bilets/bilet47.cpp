@@ -59,7 +59,7 @@ void qDel(q** head, q** tail){
 	delete temp;
 }
 
-void task2(node* root){
+void printByLevel (node* root){
 	q* head;
 	q* tail;
 	head = new q;
@@ -76,16 +76,13 @@ void task2(node* root){
 	}
 }
 
-void SVOG(graf grap, int ver1,int ver2)
-{
-    node* temp = grap.arr[ver1 - 1];
+//task3
+bool areVerticesAdjacent(grph& graph, int ver1, int ver2) {
+    node* temp = graph.arr[ver1 - 1];
     while (temp) {
         if (temp->num == ver2)
-        {
-            cout << "ver1 and ver2 sumishni" << endl;
-            return;
-        }
+            return true;
         temp = temp->next;
     }
-    cout << "ver1 and ver2 not a sumishni" << endl;
+    return false;
 }
