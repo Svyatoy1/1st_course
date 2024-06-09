@@ -122,3 +122,44 @@ void initPoliz(char in[100], char out[100]) {
 }
 
 //task3
+void pushStack(StackNode** head, StackNode** tail, int vertex) {
+    StackNode* newNode = new StackNode;
+    newNode->vertex = vertex;
+    newNode->next = NULL;
+    if (*tail)
+        (*tail)->next = newNode;
+    else
+        *head = newNode;
+    *tail = newNode;
+}
+
+// Функція для визначення всіх вершин на відстані d від заданої вершини
+void findVerticesAtDistance(Graph graph, int startVertex, int distance) {
+    int distances[graphSize];
+    for (int i = 0; i < graphSize; i++)
+        distances[i] = -1;
+    distances[startVertex - 1] = 0;
+
+    StackNode* head = new StackNode;
+    head->vertex = startVertex;
+    head->next = NULL;
+    StackNode* tail = head;
+
+    while (head) {
+        int currentVertex = head->vertex;
+        StackNode* toDelete = head;
+        head = head->next;
+        if (!head)
+            tail = NULL;
+        delete toDelete;
+
+        Node* neighbor = graph.adjList[currentVertex - 1];
+        while (neighbor) {
+            if (distances[neighbor->vertex] == -1) {
+                distances[neighbor->vertex] = distances[currentVertex - 1] + 1;
+                pushStack(&head, &tail, neighbor->vertex + 1);
+            }
+            neighbor = neighbor->next;
+        }
+    }
+}
