@@ -38,6 +38,7 @@ void selectionSort(DoublyLinkedList& list) {
     }
 }
 
+//task2
 struct q{
 	q* next;
 	node* nd;
