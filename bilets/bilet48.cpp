@@ -70,3 +70,53 @@ void breaks(list** head_neparni, list** tail_neparni, list** head_parni, list** 
 		} while ((*tail_neparni)->left != (*head_neparni));
 	}
 }
+
+//task2
+struct poliz {
+	char element;
+	poliz* next;
+};
+
+void polizAdd(poliz** head, char el) {
+	poliz* adder = new poliz;
+	adder->element = el;
+	adder->next = (*head);
+	(*head) = adder;
+}
+
+char getElement(poliz** head) {
+	char element = (*head)->element;
+	poliz* temp = (*head);
+	(*head) = (*head)->next;
+	delete temp;
+	return element;
+}
+
+void initPoliz(char in[100], char out[100]) {
+	poliz* head = NULL;
+	int i = 0;
+	int j = 0;
+
+	while (in[i]) {
+		while (in[i] && (in[i] != '-' && in[i] != '/')) {
+			out[j] = in[i];
+			i++; 
+			j++;
+		}
+		out[j] = ' ';
+		j++;
+		if (in[i]) {
+			while (head && (head->element == '/' || (head->element == in[i]))) {
+				out[j] = getElement(&head);
+				j++;
+			}
+			polizAdd(&head, in[i]);
+			i++;
+		}
+	}
+
+	while (head){
+		out[j] = getElement(&head);
+		j++;
+	}
+}
