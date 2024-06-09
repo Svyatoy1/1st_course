@@ -37,3 +37,41 @@ void selectionSort(DoublyLinkedList& list) {
         start = start->next;
     }
 }
+
+struct q{
+	q* next;
+	node* nd;
+};
+
+void qAdd(q** head, q** tail, node* nod){
+	q* temp = new q;
+	temp->next = NULL;
+	temp->nd = nod;
+	(*tail)->next = temp;
+	*tail = temp;
+}
+
+void qDel(q** head, q** tail){
+	q* temp = *head;
+	if (*head == *tail)
+		*tail = NULL;
+	*head = (*head)->next;
+	delete temp;
+}
+
+void task2(node* root){
+	q* head;
+	q* tail;
+	head = new q;
+	head->next = NULL;
+	head->nd = root;
+	tail = head;	
+	while (head) {
+		if (head->nd->left)
+			qAdd(&head, &tail, head->nd->left);
+		if (head->nd->right)
+			qAdd(&head, &tail, head->nd->right);			
+		cout << head->nd->data<<"; ";
+		qDel(&head, &tail);	
+	}
+}
