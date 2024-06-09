@@ -113,7 +113,7 @@ int findMaxLessThanA(node* root, int a) {
 }
 
 //task5
-//замість N можна подати будь-яке число, бо Іванов не оч лююить константи поза функцією
+//замість N можна подати будь-яке число, бо Іванов не оч любить глобальні змінні
 void DFS(int graph[N][N], int vertex, bool visited[N]) {
     visited[vertex] = true;
     for (int i = 0; i < N; ++i) {
